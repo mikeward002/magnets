@@ -3,95 +3,139 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Magnet Business Model v3</title>
+<title>Magnet Business Model v4</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f1117; color: #e2e8f0; min-height: 100vh; font-size: 13px; }
 
-.header { background: linear-gradient(135deg, #1a1f2e, #16213e); padding: 20px 28px 16px; border-bottom: 1px solid #2d3748; }
-.header h1 { font-size: 19px; font-weight: 700; color: #fff; }
-.header p { font-size: 11px; color: #718096; margin-top: 3px; }
+.header { background: linear-gradient(135deg, #1a1f2e, #16213e); padding: 18px 26px 14px; border-bottom: 1px solid #2d3748; display: flex; align-items: baseline; gap: 16px; }
+.header h1 { font-size: 18px; font-weight: 700; color: #fff; }
+.header p { font-size: 11px; color: #718096; }
 
-.layout { display: grid; grid-template-columns: 300px 1fr; min-height: calc(100vh - 68px); }
+.layout { display: grid; grid-template-columns: 280px 1fr; min-height: calc(100vh - 62px); }
 
 /* SIDEBAR */
-.sb { background: #141822; border-right: 1px solid #2d3748; padding: 16px; overflow-y: auto; }
-.sl { font-size: 9px; font-weight: 700; letter-spacing: 1.3px; text-transform: uppercase; color: #4a5568; margin: 16px 0 9px; padding-bottom: 4px; border-bottom: 1px solid #2d3748; }
+.sb { background: #141822; border-right: 1px solid #2d3748; padding: 14px; overflow-y: auto; }
+.sl { font-size: 9px; font-weight: 700; letter-spacing: 1.3px; text-transform: uppercase; color: #4a5568; margin: 14px 0 8px; padding-bottom: 4px; border-bottom: 1px solid #2d3748; }
 .sl:first-child { margin-top: 0; }
-.cg { margin-bottom: 11px; }
-.cg label { display: flex; justify-content: space-between; font-size: 11px; color: #a0aec0; margin-bottom: 4px; font-weight: 500; }
+.cg { margin-bottom: 10px; }
+.cg label { display: flex; justify-content: space-between; font-size: 11px; color: #a0aec0; margin-bottom: 4px; }
 .cg label span { font-weight: 700; color: #63b3ed; }
 input[type=range] { width: 100%; height: 3px; -webkit-appearance: none; background: #2d3748; border-radius: 2px; outline: none; cursor: pointer; }
-input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; background: #4299e1; border-radius: 50%; cursor: pointer; border: 2px solid #1a202c; }
-.hint { font-size: 9.5px; color: #4a5568; margin-top: 2px; font-style: italic; line-height: 1.4; }
-
-.bench { background: #1a202c; border: 1px solid #2d3748; border-radius: 7px; padding: 10px 12px; margin-top: 14px; }
-.bt { font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: #718096; margin-bottom: 6px; font-weight: 600; }
-.br { display: flex; justify-content: space-between; font-size: 11px; color: #a0aec0; padding: 2px 0; }
-.br .v { font-weight: 600; color: #68d391; }
-
-.v2tag { background: #2d2040; border: 1px solid #553c9a; border-radius: 6px; padding: 8px 11px; margin-top: 12px; font-size: 10px; color: #9f7aea; line-height: 1.5; }
-.v2tag strong { color: #b794f4; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 13px; height: 13px; background: #4299e1; border-radius: 50%; cursor: pointer; border: 2px solid #1a202c; }
+.hint { font-size: 9px; color: #4a5568; margin-top: 2px; font-style: italic; line-height: 1.4; }
 
 /* MAIN */
-.main { padding: 18px 22px; overflow-y: auto; }
-
-.tabs { display: flex; gap: 5px; margin-bottom: 16px; flex-wrap: wrap; }
-.tab { padding: 6px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 600; cursor: pointer; border: 1px solid #2d3748; color: #718096; background: #1a1f2e; transition: all 0.15s; white-space: nowrap; }
+.main { padding: 16px 20px; overflow-y: auto; }
+.tabs { display: flex; gap: 5px; margin-bottom: 14px; flex-wrap: wrap; }
+.tab { padding: 6px 13px; border-radius: 6px; font-size: 11px; font-weight: 600; cursor: pointer; border: 1px solid #2d3748; color: #718096; background: #1a1f2e; transition: all 0.15s; }
 .tab.active { background: #1a2744; color: #63b3ed; border-color: #2b6cb0; }
-
 .view { display: none; }
 .view.active { display: block; }
 
-/* STAT STRIP */
-.strip { display: grid; gap: 8px; margin-bottom: 14px; }
-.strip-4 { grid-template-columns: repeat(4, 1fr); }
-.strip-5 { grid-template-columns: repeat(5, 1fr); }
-.stat { background: #1a1f2e; border: 1px solid #2d3748; border-radius: 8px; padding: 12px 14px; }
-.stat.hi { border-color: #2b6cb0; background: #1a2744; }
-.stat.warn { border-color: #744210; background: #1a1200; }
-.stat.good { border-color: #276749; background: #0d1f15; }
-.stat.danger { border-color: #742a2a; background: #1a0d0d; }
-.st-lbl { font-size: 9px; text-transform: uppercase; letter-spacing: 0.7px; color: #4a5568; margin-bottom: 4px; font-weight: 600; }
-.stat.hi .st-lbl { color: #4299e1; }
-.stat.warn .st-lbl { color: #d69e2e; }
-.stat.good .st-lbl { color: #68d391; }
-.stat.danger .st-lbl { color: #fc8181; }
-.st-val { font-size: 21px; font-weight: 800; color: #e2e8f0; line-height: 1; }
-.st-sub { font-size: 10px; color: #718096; margin-top: 3px; }
+/* ---- LABOR VISUAL ---- */
+.day-visual { background: #141822; border: 1px solid #2d3748; border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+.dv-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #718096; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; }
+.dv-title span { font-size: 10px; color: #4a5568; font-weight: 400; text-transform: none; letter-spacing: 0; }
 
-/* SCENARIO CARDS */
-.sc-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin-bottom: 14px; }
-.sc { background: #1a1f2e; border: 1px solid #2d3748; border-radius: 8px; padding: 13px; }
-.sc.you { border-color: #4299e1; background: #1a2744; }
-.sc.sariah { border-color: #805ad5; background: #1a1630; }
-.sc.mill { border-color: #d69e2e; background: #1a1500; }
-.sc-lbl { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; margin-bottom: 6px; color: #4a5568; }
-.sc.you .sc-lbl { color: #4299e1; }
-.sc.sariah .sc-lbl { color: #9f7aea; }
-.sc.mill .sc-lbl { color: #d69e2e; }
-.sc-rev { font-size: 26px; font-weight: 800; color: #e2e8f0; line-height: 1; }
-.sc-mo { font-size: 10.5px; color: #718096; margin-top: 2px; }
-.sc-note { font-size: 10px; color: #4a5568; margin-top: 7px; padding-top: 7px; border-top: 1px solid #2d3748; line-height: 1.5; }
+/* 24-hour timeline bar */
+.timeline-wrap { position: relative; margin-bottom: 20px; }
+.timeline-labels { display: flex; justify-content: space-between; font-size: 9px; color: #4a5568; margin-bottom: 4px; }
+.timeline-bar { height: 32px; background: #1a202c; border-radius: 6px; overflow: hidden; display: flex; position: relative; border: 1px solid #2d3748; }
+.tl-segment { height: 100%; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.85); overflow: hidden; white-space: nowrap; transition: width 0.3s; min-width: 0; }
+.tl-segment span { overflow: hidden; text-overflow: clip; padding: 0 3px; }
+.tl-sleep { background: #1a202c; border-right: 1px solid #2d3748; }
+.tl-prod { background: #2b6cb0; }
+.tl-fulfill { background: #744210; }
+.tl-admin { background: #553c9a; }
+.tl-social { background: #276749; }
+.tl-wed { background: #744210; }
+.tl-free { background: #1a2030; border-left: 1px dashed #2d3748; }
 
-/* CHANNEL BOX */
-.ch-box { background: #1a1f2e; border: 1px solid #2d3748; border-radius: 8px; padding: 14px 18px; margin-bottom: 12px; }
-.ch-ttl { font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #718096; margin-bottom: 12px; }
-.ch-row { margin-bottom: 11px; }
-.ch-meta { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
-.ch-name { font-size: 12.5px; color: #e2e8f0; font-weight: 600; }
-.ch-det { font-size: 10px; color: #4a5568; }
-.ch-amt { font-size: 12.5px; font-weight: 700; }
-.bar-t { height: 4px; background: #2d3748; border-radius: 2px; overflow: hidden; }
-.bar-f { height: 100%; border-radius: 2px; transition: width 0.25s; }
+/* Activity legend */
+.legend { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-bottom: 14px; }
+.leg-item { display: flex; align-items: center; gap: 5px; font-size: 10px; color: #a0aec0; }
+.leg-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
 
-/* TABLE BOX */
+/* Hour blocks grid */
+.activity-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+.act-card { background: #1a202c; border-radius: 8px; padding: 12px 14px; display: flex; align-items: center; gap: 12px; border-left: 3px solid transparent; }
+.act-icon { font-size: 20px; flex-shrink: 0; }
+.act-info { flex: 1; }
+.act-name { font-size: 11px; color: #a0aec0; margin-bottom: 3px; }
+.act-hrs { font-size: 22px; font-weight: 800; line-height: 1; }
+.act-hrs-unit { font-size: 11px; font-weight: 400; color: #718096; }
+.act-sub { font-size: 9.5px; color: #4a5568; margin-top: 2px; line-height: 1.4; }
+.act-bar { width: 40px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.act-bar-track { width: 6px; height: 48px; background: #2d3748; border-radius: 3px; overflow: hidden; position: relative; }
+.act-bar-fill { width: 100%; border-radius: 3px; position: absolute; bottom: 0; transition: height 0.3s; }
+.act-bar-pct { font-size: 9px; color: #4a5568; }
+
+/* Total workday callout */
+.workday-callout { border-radius: 8px; padding: 14px 18px; margin-bottom: 14px; display: flex; align-items: center; gap: 20px; }
+.wc-ok { background: #0d1f15; border: 1px solid #276749; }
+.wc-warn { background: #1a1200; border: 1px solid #744210; }
+.wc-danger { background: #1a0d0d; border: 1px solid #742a2a; }
+.wc-hrs { font-size: 52px; font-weight: 800; line-height: 1; }
+.wc-ok .wc-hrs { color: #68d391; }
+.wc-warn .wc-hrs { color: #f6e05e; }
+.wc-danger .wc-hrs { color: #fc8181; }
+.wc-label { font-size: 11px; color: #718096; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.6px; }
+.wc-status { font-size: 15px; font-weight: 700; }
+.wc-ok .wc-status { color: #68d391; }
+.wc-warn .wc-status { color: #f6e05e; }
+.wc-danger .wc-status { color: #fc8181; }
+.wc-detail { font-size: 11px; color: #718096; margin-top: 4px; line-height: 1.6; }
+.wc-breakdown { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+.wc-row { display: flex; justify-content: space-between; align-items: center; padding: 3px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.wc-row:last-child { border-bottom: none; }
+.wc-row-label { font-size: 10.5px; color: #a0aec0; }
+.wc-row-val { font-size: 12px; font-weight: 700; }
+
+/* Headcount timeline */
+.headcount-timeline { margin-bottom: 14px; }
+.hc-phase { background: #1a1f2e; border: 1px solid #2d3748; border-radius: 8px; margin-bottom: 8px; overflow: hidden; }
+.hc-phase.active-phase { border-color: #4299e1; }
+.hc-phase.future { opacity: 0.6; }
+.hc-header { display: flex; align-items: center; gap: 12px; padding: 12px 16px; }
+.hc-phase-lbl { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; background: #2d3748; color: #a0aec0; padding: 2px 8px; border-radius: 10px; white-space: nowrap; }
+.hc-phase.active-phase .hc-phase-lbl { background: #2b6cb0; color: #63b3ed; }
+.hc-orders { font-size: 11px; color: #4a5568; }
+.hc-title { font-size: 13px; font-weight: 700; color: #e2e8f0; flex: 1; }
+.hc-heads { display: flex; gap: 5px; }
+.head-dot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; border: 2px solid #2d3748; }
+.head-dot.you { background: #1a2744; border-color: #4299e1; }
+.head-dot.hire { background: #1a1500; border-color: #d69e2e; }
+.head-dot.pt { background: #0d1f15; border-color: #68d391; }
+.head-dot.ghost { background: #1a1f2e; border-color: #2d3748; opacity: 0.3; }
+.hc-body { padding: 0 16px 12px; }
+.hc-roles { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.hc-role-tag { font-size: 10px; padding: 3px 8px; border-radius: 10px; }
+.role-you { background: #1a2744; color: #63b3ed; border: 1px solid #2b6cb0; }
+.role-wed { background: #1a1500; color: #d69e2e; border: 1px solid #744210; }
+.role-pt { background: #0d1f15; color: #68d391; border: 1px solid #276749; }
+.role-ft { background: #2d1a00; color: #f6ad55; border: 1px solid #744210; }
+.hc-hrs-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.hc-hrs-item { font-size: 10px; color: #718096; background: #141822; border-radius: 5px; padding: 3px 8px; }
+.hc-hrs-item strong { color: #a0aec0; }
+
+/* Weekly view */
+.week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 14px; }
+.day-col { background: #1a1f2e; border-radius: 6px; overflow: hidden; border: 1px solid #2d3748; }
+.day-col.weekend { border-color: #744210; background: #1a1200; }
+.day-name { text-align: center; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #4a5568; padding: 5px 0 4px; border-bottom: 1px solid #2d3748; }
+.day-col.weekend .day-name { color: #d69e2e; }
+.day-col.wed-day .day-name { color: #68d391; }
+.day-stack { padding: 4px; display: flex; flex-direction: column; gap: 2px; }
+.day-block { border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 600; color: rgba(255,255,255,0.8); min-height: 4px; overflow: hidden; padding: 0 2px; }
+
+/* Tables & shared */
 .tb { background: #1a1f2e; border: 1px solid #2d3748; border-radius: 8px; padding: 14px 18px; margin-bottom: 12px; }
 .tb-ttl { font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #718096; margin-bottom: 11px; }
 table { width: 100%; border-collapse: collapse; }
-th { font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; color: #4a5568; text-align: left; padding: 2px 6px 7px 0; border-bottom: 1px solid #2d3748; }
+th { font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; color: #4a5568; text-align: left; padding: 2px 0 7px; border-bottom: 1px solid #2d3748; }
 th:last-child { text-align: right; }
-td { font-size: 11px; color: #a0aec0; padding: 6px 6px 6px 0; border-bottom: 1px solid #1a202c; vertical-align: middle; line-height: 1.4; }
+td { font-size: 11px; color: #a0aec0; padding: 6px 4px 6px 0; border-bottom: 1px solid #1a202c; vertical-align: middle; line-height: 1.4; }
 td:last-child { text-align: right; font-weight: 700; font-size: 11.5px; }
 tr:last-child td { border-bottom: none; }
 .g { color: #68d391 !important; }
@@ -102,329 +146,220 @@ tr:last-child td { border-bottom: none; }
 .r { color: #fc8181 !important; }
 .w { color: #e2e8f0 !important; }
 
-/* LABOR SPECIFIC */
-.labor-gauge { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 12px; }
-.gauge { background: #1a1f2e; border: 1px solid #2d3748; border-radius: 8px; padding: 13px; }
-.gauge.overload { border-color: #742a2a; background: #1a0d0d; }
-.gauge.heavy { border-color: #744210; background: #1a1200; }
-.gauge.ok { border-color: #276749; background: #0d1f15; }
-.g-lbl { font-size: 9px; text-transform: uppercase; letter-spacing: 0.7px; color: #4a5568; margin-bottom: 5px; font-weight: 600; }
-.gauge.overload .g-lbl { color: #fc8181; }
-.gauge.heavy .g-lbl { color: #d69e2e; }
-.gauge.ok .g-lbl { color: #68d391; }
-.g-val { font-size: 28px; font-weight: 800; color: #e2e8f0; line-height: 1; }
-.g-sub { font-size: 10px; color: #718096; margin-top: 3px; }
-.g-bar { height: 6px; background: #2d3748; border-radius: 3px; overflow: hidden; margin-top: 8px; }
-.g-fill { height: 100%; border-radius: 3px; transition: width 0.3s; }
-
 .note { border-left: 3px solid #4299e1; background: #1a2030; border-radius: 0 6px 6px 0; padding: 9px 12px; font-size: 11px; color: #a0aec0; margin-bottom: 9px; line-height: 1.6; }
 .note.warn { border-color: #d69e2e; background: #1a1500; }
 .note.good { border-color: #68d391; background: #0d1f15; }
 .note.danger { border-color: #fc8181; background: #1a0d0d; }
 .note strong { color: #fff; }
 
-.soc-box { background: #1a1f30; border: 1px solid #4a5568; border-radius: 8px; padding: 14px 18px; margin-bottom: 12px; }
-.soc-ttl { font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #9f7aea; margin-bottom: 12px; }
-
-.hire-card { background: #1a1f2e; border: 1px solid #2d3748; border-radius: 8px; padding: 13px 16px; margin-bottom: 8px; }
-.hire-card.trigger { border-color: #d69e2e; background: #1a1500; }
-.hire-card.soon { border-color: #276749; background: #0d1f15; }
-.hc-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 5px; }
-.hc-role { font-size: 12.5px; font-weight: 700; color: #e2e8f0; }
-.hc-when { font-size: 10px; color: #4a5568; }
-.hire-card.trigger .hc-when { color: #d69e2e; font-weight: 600; }
-.hire-card.soon .hc-when { color: #68d391; font-weight: 600; }
-.hc-det { font-size: 10.5px; color: #718096; line-height: 1.5; }
+/* Revenue tab */
+.strip { display: grid; gap: 8px; margin-bottom: 12px; }
+.strip-4 { grid-template-columns: repeat(4, 1fr); }
+.stat { background: #1a1f2e; border: 1px solid #2d3748; border-radius: 8px; padding: 12px 14px; }
+.stat.hi { border-color: #2b6cb0; background: #1a2744; }
+.st-lbl { font-size: 9px; text-transform: uppercase; letter-spacing: 0.7px; color: #4a5568; margin-bottom: 4px; font-weight: 600; }
+.stat.hi .st-lbl { color: #4299e1; }
+.st-val { font-size: 20px; font-weight: 800; color: #e2e8f0; line-height: 1; }
+.st-sub { font-size: 10px; color: #718096; margin-top: 3px; }
+.ch-box { background: #1a1f2e; border: 1px solid #2d3748; border-radius: 8px; padding: 14px 18px; margin-bottom: 12px; }
+.ch-ttl { font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #718096; margin-bottom: 12px; }
+.ch-row { margin-bottom: 10px; }
+.ch-meta { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+.ch-name { font-size: 12px; color: #e2e8f0; font-weight: 600; }
+.ch-det { font-size: 10px; color: #4a5568; }
+.ch-amt { font-size: 12px; font-weight: 700; }
+.bar-t { height: 4px; background: #2d3748; border-radius: 2px; overflow: hidden; }
+.bar-f { height: 100%; border-radius: 2px; transition: width 0.25s; }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <h1>📎 Magnet Business Model — Revenue + Labor</h1>
-  <p>D2C ($4–5/magnet) · 1 Wedding/week · Social media variable · Kits/machine sales = v2</p>
+  <h1>📎 Magnet Business Model v4</h1>
+  <p>Revenue · Labor Hours · Headcount · Social — all live sliders</p>
 </div>
 
 <div class="layout">
+<div class="sb">
+  <div class="sl">D2C — Photo Magnets</div>
+  <div class="cg"><label>Price/magnet <span id="lbl_price">$4.50</span></label><input type="range" id="r_price" min="4" max="5" step="0.25" value="4.5"></div>
+  <div class="cg"><label>Avg magnets/order <span id="lbl_qty">9</span></label><input type="range" id="r_qty" min="3" max="15" step="1" value="9"><div class="hint">9-pack = HP's core SKU. Free ship at $35+ drives this.</div></div>
+  <div class="cg"><label>D2C orders/month <span id="lbl_orders">400</span></label><input type="range" id="r_orders" min="50" max="4000" step="50" value="400"></div>
+  <div class="cg"><label>Art/quote premium <span id="lbl_artprem">+$2.50</span></label><input type="range" id="r_artprem" min="0" max="6" step="0.25" value="2.5"></div>
+  <div class="cg"><label>% orders with art <span id="lbl_artpct">35%</span></label><input type="range" id="r_artpct" min="0" max="80" step="5" value="35"></div>
 
-  <!-- SIDEBAR -->
-  <div class="sb">
-    <div class="sl">D2C — Photo Magnets</div>
-    <div class="cg"><label>Price per magnet <span id="lbl_price">$4.50</span></label>
-      <input type="range" id="r_price" min="4" max="5" step="0.25" value="4.5">
-      <div class="hint">Volume play: $4–5. Free shipping at $35 pushes 9-pack as natural order size.</div></div>
-    <div class="cg"><label>Avg magnets/order <span id="lbl_qty">9</span></label>
-      <input type="range" id="r_qty" min="3" max="15" step="1" value="9">
-      <div class="hint">9-pack = Instagram grid, HP's hero SKU. Free ship threshold drives this.</div></div>
-    <div class="cg"><label>D2C orders/month <span id="lbl_orders">400</span></label>
-      <input type="range" id="r_orders" min="50" max="4000" step="50" value="400">
-      <div class="hint">HP avg: ~583/mo. Sariah peak: 2,000–3,000+/mo.</div></div>
-    <div class="cg"><label>Art/quote premium <span id="lbl_artprem">+$2.50</span></label>
-      <input type="range" id="r_artprem" min="0" max="6" step="0.25" value="2.5"></div>
-    <div class="cg"><label>% orders with art <span id="lbl_artpct">35%</span></label>
-      <input type="range" id="r_artpct" min="0" max="80" step="5" value="35"></div>
+  <div class="sl">Pre-Made Sets</div>
+  <div class="cg"><label>Set orders/month <span id="lbl_sets">100</span></label><input type="range" id="r_sets" min="0" max="600" step="10" value="100"><div class="hint">Pre-made = zero production time per order (pre-built inventory).</div></div>
+  <div class="cg"><label>Avg set value <span id="lbl_setval">$26</span></label><input type="range" id="r_setval" min="14" max="45" step="1" value="26"></div>
 
-    <div class="sl">Themed Pre-Made Sets</div>
-    <div class="cg"><label>Set orders/month <span id="lbl_sets">100</span></label>
-      <input type="range" id="r_sets" min="0" max="600" step="10" value="100">
-      <div class="hint">No upload, impulse buy. Sets pre-made = zero production time per order.</div></div>
-    <div class="cg"><label>Avg set value <span id="lbl_setval">$26</span></label>
-      <input type="range" id="r_setval" min="14" max="45" step="1" value="26"></div>
+  <div class="sl">Weddings / Events</div>
+  <div class="cg"><label>Weddings/week <span id="lbl_wed">1.0</span></label><input type="range" id="r_wed" min="0" max="4" step="0.5" value="1"></div>
+  <div class="cg"><label>Avg wedding price <span id="lbl_wedprice">$1,500</span></label><input type="range" id="r_wedprice" min="1200" max="3000" step="50" value="1500"></div>
+  <div class="cg"><label>Hours/wedding (total) <span id="lbl_wedtime">5.5</span>hr</label><input type="range" id="r_wedtime" min="3" max="8" step="0.5" value="5.5"><div class="hint">Setup 45min + event 3–4hr + teardown/travel ~1hr</div></div>
 
-    <div class="sl">Weddings / Events</div>
-    <div class="cg"><label>Weddings/week <span id="lbl_wed">1.0</span></label>
-      <input type="range" id="r_wed" min="0" max="4" step="0.5" value="1"></div>
-    <div class="cg"><label>Avg wedding price <span id="lbl_wedprice">$1,500</span></label>
-      <input type="range" id="r_wedprice" min="1200" max="3000" step="50" value="1500">
-      <div class="hint">Your range: $1,200–$1,800. Labor est: ~5–6 hrs/wedding total.</div></div>
+  <div class="sl">Social & Marketing</div>
+  <div class="cg"><label>Posts/week <span id="lbl_posts">4</span></label><input type="range" id="r_posts" min="0" max="21" step="1" value="4"><div class="hint">Sariah: 5–10/wk. HP: 5–7/wk. Min viable: 3/wk.</div></div>
+  <div class="cg"><label>Hrs/post (film+edit+post) <span id="lbl_hrpost">1.5</span></label><input type="range" id="r_hrpost" min="0.25" max="4" step="0.25" value="1.5"></div>
+  <div class="cg"><label>Monthly ad spend <span id="lbl_adspend">$0</span></label><input type="range" id="r_adspend" min="0" max="5000" step="50" value="0"></div>
+  <div class="cg"><label>ROAS (return on ad spend) <span id="lbl_adroi">3.0x</span></label><input type="range" id="r_adroi" min="1" max="8" step="0.5" value="3"></div>
 
-    <div class="sl">Social Media & Marketing</div>
-    <div class="cg"><label>Posts/week <span id="lbl_posts">4</span></label>
-      <input type="range" id="r_posts" min="0" max="21" step="1" value="4">
-      <div class="hint">HP: 5–7/wk. Sariah: 5–10/wk across platforms. 3x/wk = minimum viable.</div></div>
-    <div class="cg"><label>Hrs/post (film+edit+post) <span id="lbl_hrpost">1.5</span></label>
-      <input type="range" id="r_hrpost" min="0.25" max="4" step="0.25" value="1.5">
-      <div class="hint">Short-form Reels: 1–2 hrs. Long-form/edited: 3–4 hrs. Batch filming helps.</div></div>
-    <div class="cg"><label>Monthly ad spend <span id="lbl_adspend">$0</span></label>
-      <input type="range" id="r_adspend" min="0" max="5000" step="50" value="0">
-      <div class="hint">Sariah said organic first. But Meta retargeting at ~$200/mo can 2x repeat orders.</div></div>
-    <div class="cg"><label>Est. orders from ads (ratio) <span id="lbl_adroi">3x</span></label>
-      <input type="range" id="r_adroi" min="1" max="8" step="0.5" value="3">
-      <div class="hint">Conservative: 2–3x ROAS. Good content targeting: 4–6x.</div></div>
+  <div class="sl">Production Times</div>
+  <div class="cg"><label>Sec/magnet press+cut <span id="lbl_presstime">20</span>s</label><input type="range" id="r_presstime" min="15" max="35" step="1" value="20"><div class="hint">Research baseline: 15–20 sec physical press. Add cut time for total.</div></div>
+  <div class="cg"><label>Min/order (pack+label) <span id="lbl_packtime">2.5</span>min</label><input type="range" id="r_packtime" min="1" max="5" step="0.25" value="2.5"></div>
+  <div class="cg"><label>Admin hrs/day (CS/orders) <span id="lbl_admintime">0.75</span>hr</label><input type="range" id="r_admintime" min="0.25" max="3" step="0.25" value="0.75"></div>
 
-    <div class="sl">Labor — Production Times</div>
-    <div class="cg"><label>Sec/magnet (press+cut) <span id="lbl_presstime">20</span>s</label>
-      <input type="range" id="r_presstime" min="15" max="35" step="1" value="20">
-      <div class="hint">From research: 15–20 sec/magnet physical press time. Add cut time.</div></div>
-    <div class="cg"><label>Mins/order (pack+label) <span id="lbl_packtime">2.5</span>min</label>
-      <input type="range" id="r_packtime" min="1" max="5" step="0.25" value="2.5">
-      <div class="hint">Stuff envelope, seal, print label, scan. ~2–3 min at steady pace.</div></div>
-    <div class="cg"><label>Hrs/day admin (CS/email) <span id="lbl_admintime">0.75</span>hr</label>
-      <input type="range" id="r_admintime" min="0.25" max="3" step="0.25" value="0.75">
-      <div class="hint">Order review, customer emails, Etsy messages, returns. Scales with volume.</div></div>
-    <div class="cg"><label>Hrs/wedding (total) <span id="lbl_wedtime">5.5</span>hr</label>
-      <input type="range" id="r_wedtime" min="3" max="8" step="0.5" value="5.5">
-      <div class="hint">Setup 45min + event 3–4hr + teardown+travel ~1hr. NINEMAGS LIVE helps QR intake.</div></div>
+  <div class="sl">Costs</div>
+  <div class="cg"><label>Consumables/magnet <span id="lbl_cogs">$0.30</span></label><input type="range" id="r_cogs" min="0.08" max="0.35" step="0.01" value="0.30"></div>
+  <div class="cg"><label>Shipping/order <span id="lbl_ship">$5.50</span></label><input type="range" id="r_ship" min="3" max="9" step="0.25" value="5.5"></div>
+  <div class="cg"><label>Fixed overhead/mo <span id="lbl_fixed">$600</span></label><input type="range" id="r_fixed" min="200" max="3000" step="50" value="600"></div>
+</div>
 
-    <div class="sl">Costs</div>
-    <div class="cg"><label>Consumables/magnet <span id="lbl_cogs">$0.30</span></label>
-      <input type="range" id="r_cogs" min="0.08" max="0.35" step="0.01" value="0.30"></div>
-    <div class="cg"><label>Shipping/D2C order <span id="lbl_ship">$5.50</span></label>
-      <input type="range" id="r_ship" min="3" max="9" step="0.25" value="5.5"></div>
-    <div class="cg"><label>Fixed overhead/mo <span id="lbl_fixed">$600</span></label>
-      <input type="range" id="r_fixed" min="200" max="3000" step="50" value="600"></div>
-
-    <div class="bench">
-      <div class="bt">Benchmarks</div>
-      <div class="br"><span>Sariah now</span><span class="v">~$100K/mo</span></div>
-      <div class="br"><span>Sariah Year 1</span><span class="v">$1.63M total</span></div>
-      <div class="br"><span>Heart Printed</span><span class="v">$520K+/yr</span></div>
-      <div class="br"><span>$1M/yr run rate</span><span class="v">$83.3K/mo</span></div>
-    </div>
-
-    <div class="v2tag"><strong>v2 — Not in this model:</strong> Machine kit sales ($1,385–$2,165/kit, 30% margin). Sariah's biggest multiplier. Flag for Month 9+ once you have the journey story built.</div>
+<div class="main">
+  <div class="tabs">
+    <div class="tab" onclick="sw('revenue',this)">💰 Revenue</div>
+    <div class="tab active" onclick="sw('labor',this)">⏱️ Your Day (Hours)</div>
+    <div class="tab" onclick="sw('week',this)">📅 Your Week</div>
+    <div class="tab" onclick="sw('heads',this)">👥 Headcount</div>
+    <div class="tab" onclick="sw('scale',this)">📈 Scale Triggers</div>
   </div>
 
-  <!-- MAIN -->
-  <div class="main">
-    <div class="tabs">
-      <div class="tab active" onclick="sw('overview',this)">📊 Revenue</div>
-      <div class="tab" onclick="sw('labor',this)">⏱️ Labor & Hours</div>
-      <div class="tab" onclick="sw('social',this)">📱 Social & Ads</div>
-      <div class="tab" onclick="sw('scale',this)">📈 Scaling Heads</div>
-      <div class="tab" onclick="sw('path',this)">🗺️ Path to $1M</div>
+  <!-- ====== REVENUE TAB ====== -->
+  <div class="view" id="tab-revenue">
+    <div class="strip strip-4">
+      <div class="stat hi"><div class="st-lbl">D2C AOV</div><div class="st-val" id="aov_val">$0</div><div class="st-sub" id="aov_sub">–</div></div>
+      <div class="stat"><div class="st-lbl">Monthly Revenue</div><div class="st-val" id="total_mo">$0</div><div class="st-sub" id="annual_sub">–/year</div></div>
+      <div class="stat"><div class="st-lbl">Net Profit/mo</div><div class="st-val" id="net_mo">$0</div><div class="st-sub" id="margin_sub">–</div></div>
+      <div class="stat"><div class="st-lbl">Net $/Hr Worked</div><div class="st-val" id="perhour">$0</div><div class="st-sub" id="perhour_sub">–</div></div>
     </div>
-
-    <!-- ============ REVENUE TAB ============ -->
-    <div class="view active" id="tab-overview">
-
-      <div class="strip strip-4">
-        <div class="stat hi"><div class="st-lbl">D2C AOV</div><div class="st-val" id="aov_val">$0</div><div class="st-sub" id="aov_sub">–</div></div>
-        <div class="stat"><div class="st-lbl">Total Monthly Revenue</div><div class="st-val" id="total_mo">$0</div><div class="st-sub" id="annual_sub">–/year</div></div>
-        <div class="stat"><div class="st-lbl">Est. Net Profit/mo</div><div class="st-val" id="net_mo">$0</div><div class="st-sub" id="margin_sub">–</div></div>
-        <div class="stat"><div class="st-lbl">$/Hour (all work)</div><div class="st-val" id="perhour">$0</div><div class="st-sub" id="perhour_sub">–</div></div>
-      </div>
-
-      <div class="sc-row">
-        <div class="sc you"><div class="sc-lbl">📊 Your Model</div><div class="sc-rev" id="sc_you_rev">$0</div><div class="sc-mo" id="sc_you_mo">–</div><div class="sc-note" id="sc_you_note">–</div></div>
-        <div class="sc sariah"><div class="sc-lbl">🎯 Sariah $100K/mo</div><div class="sc-rev">$100K</div><div class="sc-mo">$1.2M/year</div><div class="sc-note" id="sc_sariah_note">–</div></div>
-        <div class="sc mill"><div class="sc-lbl">🏆 $1M/Year</div><div class="sc-rev">$83.3K</div><div class="sc-mo">per month</div><div class="sc-note" id="sc_mill_note">–</div></div>
-      </div>
-
-      <div class="ch-box">
-        <div class="ch-ttl">Monthly Revenue by Channel</div>
-        <div class="ch-row"><div class="ch-meta"><div><div class="ch-name">📦 Custom Photo Magnets</div><div class="ch-det" id="ch1d">–</div></div><div style="text-align:right"><div class="ch-amt b" id="ch1r">$0</div><div class="ch-det" id="ch1p">–</div></div></div><div class="bar-t"><div class="bar-f" id="bar1" style="background:#4299e1"></div></div></div>
-        <div class="ch-row"><div class="ch-meta"><div><div class="ch-name">🎨 Pre-Made Sets</div><div class="ch-det" id="ch2d">–</div></div><div style="text-align:right"><div class="ch-amt p" id="ch2r">$0</div><div class="ch-det" id="ch2p">–</div></div></div><div class="bar-t"><div class="bar-f" id="bar2" style="background:#9f7aea"></div></div></div>
-        <div class="ch-row"><div class="ch-meta"><div><div class="ch-name">💒 Weddings / Events</div><div class="ch-det" id="ch3d">–</div></div><div style="text-align:right"><div class="ch-amt g" id="ch3r">$0</div><div class="ch-det" id="ch3p">–</div></div></div><div class="bar-t"><div class="bar-f" id="bar3" style="background:#68d391"></div></div></div>
-        <div class="ch-row"><div class="ch-meta"><div><div class="ch-name">📱 Ads-Driven Orders</div><div class="ch-det" id="ch4d">–</div></div><div style="text-align:right"><div class="ch-amt o" id="ch4r">$0</div><div class="ch-det" id="ch4p">–</div></div></div><div class="bar-t"><div class="bar-f" id="bar4" style="background:#f6ad55"></div></div></div>
-        <div style="border-top:1px solid #2d3748;padding-top:11px;margin-top:3px;display:flex;justify-content:space-between;align-items:baseline">
-          <span style="font-size:13px;font-weight:700;color:#e2e8f0">Total Monthly</span>
-          <div style="text-align:right"><div style="font-size:22px;font-weight:800;color:#f6e05e" id="total_rev">$0</div><div style="font-size:10px;color:#4a5568" id="annual_rev2">–</div></div>
-        </div>
-      </div>
-
-      <div class="tb">
-        <div class="tb-ttl">Profit Breakdown</div>
-        <table><thead><tr><th>Line Item</th><th>Monthly</th><th>Notes</th><th>Net Running</th></tr></thead>
-        <tbody id="profit_table"></tbody></table>
+    <div class="ch-box">
+      <div class="ch-ttl">Monthly Revenue by Channel</div>
+      <div class="ch-row"><div class="ch-meta"><div><div class="ch-name">📦 Custom Photo Magnets</div><div class="ch-det" id="ch1d">–</div></div><div><div class="ch-amt b" id="ch1r">$0</div><div class="ch-det" id="ch1p">–</div></div></div><div class="bar-t"><div class="bar-f" id="bar1" style="background:#4299e1"></div></div></div>
+      <div class="ch-row"><div class="ch-meta"><div><div class="ch-name">🎨 Pre-Made Sets</div><div class="ch-det" id="ch2d">–</div></div><div><div class="ch-amt p" id="ch2r">$0</div><div class="ch-det" id="ch2p">–</div></div></div><div class="bar-t"><div class="bar-f" id="bar2" style="background:#9f7aea"></div></div></div>
+      <div class="ch-row"><div class="ch-meta"><div><div class="ch-name">💒 Weddings</div><div class="ch-det" id="ch3d">–</div></div><div><div class="ch-amt g" id="ch3r">$0</div><div class="ch-det" id="ch3p">–</div></div></div><div class="bar-t"><div class="bar-f" id="bar3" style="background:#68d391"></div></div></div>
+      <div style="border-top:1px solid #2d3748;padding-top:10px;margin-top:3px;display:flex;justify-content:space-between;">
+        <span style="font-weight:700;color:#e2e8f0">Total</span>
+        <div style="text-align:right"><span style="font-size:20px;font-weight:800;color:#f6e05e" id="total_rev2">$0</span> <span style="font-size:10px;color:#4a5568" id="annual_rev">–/yr</span></div>
       </div>
     </div>
-
-    <!-- ============ LABOR TAB ============ -->
-    <div class="view" id="tab-labor">
-
-      <div class="strip strip-5" id="labor_strip">
-        <div class="stat hi"><div class="st-lbl">Total Hrs/Day</div><div class="st-val" id="lhr_day">0</div><div class="st-sub" id="lhr_day_sub">–</div></div>
-        <div class="stat"><div class="st-lbl">Production Hrs/Day</div><div class="st-val" id="lhr_prod">0</div><div class="st-sub">print + press + cut</div></div>
-        <div class="stat"><div class="st-lbl">Fulfillment Hrs/Day</div><div class="st-val" id="lhr_ship">0</div><div class="st-sub">pack + label + USPS</div></div>
-        <div class="stat"><div class="st-lbl">Wedding Hrs/Week</div><div class="st-val" id="lhr_wed">0</div><div class="st-sub" id="lhr_wed_sub">–</div></div>
-        <div class="stat"><div class="st-lbl">Social Hrs/Week</div><div class="st-val" id="lhr_soc">0</div><div class="st-sub" id="lhr_soc_sub">–</div></div>
-      </div>
-
-      <div class="labor-gauge" id="labor_gauges">
-        <div id="gauge_prod"><div class="gauge ok"><div class="g-lbl">Production Load</div><div class="g-val" id="g_prod_val">0 hrs/day</div><div class="g-sub" id="g_prod_sub">–</div><div class="g-bar"><div class="g-fill" id="g_prod_bar" style="background:#68d391;width:0%"></div></div></div></div>
-        <div id="gauge_total"><div class="gauge ok"><div class="g-lbl">Total Daily Workload</div><div class="g-val" id="g_total_val">0 hrs/day</div><div class="g-sub" id="g_total_sub">–</div><div class="g-bar"><div class="g-fill" id="g_total_bar" style="background:#68d391;width:0%"></div></div></div></div>
-      </div>
-
-      <div class="tb">
-        <div class="tb-ttl">Daily Time Budget Breakdown</div>
-        <table>
-          <thead><tr><th>Task</th><th>How Calculated</th><th>Daily Hours</th><th>Weekly Hours</th></tr></thead>
-          <tbody id="labor_table"></tbody>
-        </table>
-      </div>
-
-      <div class="tb">
-        <div class="tb-ttl">Revenue per Hour (by activity) — Is Your Time Well Spent?</div>
-        <table>
-          <thead><tr><th>Activity</th><th>Time Invested</th><th>Revenue Generated</th><th>$/Hour</th></tr></thead>
-          <tbody id="rev_per_hour_table"></tbody>
-        </table>
-      </div>
-
-      <div id="labor_notes"></div>
+    <div class="tb"><div class="tb-ttl">Profit Breakdown</div>
+      <table><thead><tr><th>Item</th><th>Monthly</th><th>Notes</th><th>Net</th></tr></thead>
+      <tbody id="profit_tbl"></tbody></table>
     </div>
+  </div>
 
-    <!-- ============ SOCIAL & ADS TAB ============ -->
-    <div class="view" id="tab-social">
+  <!-- ====== YOUR DAY TAB ====== -->
+  <div class="view active" id="tab-labor">
 
-      <div class="soc-box">
-        <div class="soc-ttl">📱 Social Media Engine — Orders & Time Model</div>
-        <div class="strip strip-4" style="margin-bottom:0">
-          <div class="stat"><div class="st-lbl">Posts/Week</div><div class="st-val" id="soc_posts">0</div><div class="st-sub" id="soc_posts_sub">–</div></div>
-          <div class="stat"><div class="st-lbl">Social Hrs/Week</div><div class="st-val" id="soc_hrs">0</div><div class="st-sub">film + edit + post</div></div>
-          <div class="stat"><div class="st-lbl">Ad Spend/mo</div><div class="st-val" id="soc_spend">$0</div><div class="st-sub" id="soc_roas_sub">–</div></div>
-          <div class="stat good"><div class="st-lbl">Orders from Ads</div><div class="st-val" id="soc_orders">0</div><div class="st-sub" id="soc_rev_sub">–</div></div>
-        </div>
+    <!-- BIG WORKDAY CALLOUT -->
+    <div class="workday-callout" id="wc_box">
+      <div style="text-align:center;min-width:90px">
+        <div class="wc-label">Hours / Day</div>
+        <div class="wc-hrs" id="wc_hrs">0</div>
+        <div class="wc-status" id="wc_status">–</div>
       </div>
-
-      <div class="tb">
-        <div class="tb-ttl">Posting Frequency Benchmarks vs. Your Input</div>
-        <table>
-          <thead><tr><th>Operator</th><th>Platform Mix</th><th>Posts/Week</th><th>Followers</th><th>Est. Orders Driven</th></tr></thead>
-          <tbody id="soc_bench_table"></tbody>
-        </table>
-      </div>
-
-      <div class="tb">
-        <div class="tb-ttl">Social Posting Scenarios — Time vs. Revenue Impact</div>
-        <table>
-          <thead><tr><th>Posts/Week</th><th>Hrs/Week</th><th>Hrs/Month</th><th>Est. Organic Order Lift</th><th>Incremental Revenue</th><th>$/Hr of Social Work</th></tr></thead>
-          <tbody id="soc_scenario_table"></tbody>
-        </table>
-      </div>
-
-      <div class="tb">
-        <div class="tb-ttl">Paid Ads Model — ROAS Scenarios at Your Budget</div>
-        <table>
-          <thead><tr><th>Monthly Spend</th><th>ROAS</th><th>Revenue from Ads</th><th>Net Profit from Ads</th><th>Extra Orders/mo</th></tr></thead>
-          <tbody id="ads_table"></tbody>
-        </table>
-      </div>
-
-      <div class="note">
-        <strong>Heart Printed's growth playbook:</strong> Alesia posts 5–7x/week across Instagram Reels + TikTok, uses comment-trigger DM automation (ManyChat) on every post, and relied entirely on organic for her first 5 years. Sariah went from 0 to $100K/month in 6 months primarily via TikTok + Instagram viral content — no paid ads until after she was already generating significant revenue. The content IS the marketing. Every magnet-making video, wedding highlight, and "pack orders with me" is a conversion funnel.
-      </div>
-
-      <div class="note warn">
-        <strong>Time cost of social:</strong> At <span id="soc_time_warn">–</span> posts/week × <span id="soc_hrpost_warn">–</span> hrs/post, you're investing <span id="soc_total_warn">–</span> hrs/month in social — that's <span id="soc_equiv_warn">–</span> of a full-time employee's work week. Budget this intentionally. Batch filming (shoot 5–6 videos in one session) is the #1 efficiency gain: Sariah and Alesia both batch-film content.
+      <div class="wc-breakdown">
+        <div class="wc-row"><span class="wc-row-label">🖨️ Production (print + press)</span><span class="wc-row-val b" id="wd_prod">0 hrs</span></div>
+        <div class="wc-row"><span class="wc-row-label">📦 Fulfillment (pack + ship run)</span><span class="wc-row-val y" id="wd_ful">0 hrs</span></div>
+        <div class="wc-row"><span class="wc-row-label">💻 Admin / CS / orders</span><span class="wc-row-val p" id="wd_adm">0 hrs</span></div>
+        <div class="wc-row"><span class="wc-row-label">📱 Social / content</span><span class="wc-row-val g" id="wd_soc">0 hrs</span></div>
+        <div class="wc-row"><span class="wc-row-label">💒 Weddings (daily avg)</span><span class="wc-row-val o" id="wd_wed">0 hrs</span></div>
+        <div class="wc-row" style="border-top:1px solid rgba(255,255,255,0.1);padding-top:6px;margin-top:4px"><span class="wc-row-label" style="color:#e2e8f0;font-weight:700">Free time remaining (of 16hr day)</span><span class="wc-row-val" id="wd_free" style="font-size:16px">0 hrs</span></div>
       </div>
     </div>
 
-    <!-- ============ SCALE TAB ============ -->
-    <div class="view" id="tab-scale">
-
-      <div class="note good">
-        <strong>The scaling question:</strong> At what order volume does a solo operator hit the wall? Based on the labor model, you hit a 10-hr workday somewhere between 400–600 D2C orders/month. Here's what each hire does for you and when to pull the trigger.
+    <!-- 24-HR TIMELINE -->
+    <div class="day-visual">
+      <div class="dv-title">Your day visualized — 24 hours <span>6am → 10pm = 16 working hours shown</span></div>
+      <div class="timeline-wrap">
+        <div class="timeline-labels" id="tl_labels"></div>
+        <div class="timeline-bar" id="tl_bar"></div>
       </div>
-
-      <div class="tb">
-        <div class="tb-ttl">Order Volume vs. Solo Operator Hours — Where You Hit the Wall</div>
-        <table>
-          <thead><tr><th>D2C Orders/mo</th><th>Prod. Hrs/Day</th><th>Fulfillment Hrs/Day</th><th>Admin Hrs/Day</th><th>Total Hrs/Day</th><th>Status</th></tr></thead>
-          <tbody id="scale_table"></tbody>
-        </table>
-      </div>
-
-      <div id="hire_cards"></div>
-
-      <div class="tb">
-        <div class="tb-ttl">Hire ROI — What Each Person Adds</div>
-        <table>
-          <thead><tr><th>Role</th><th>Trigger Volume</th><th>Cost/Month</th><th>Hours Freed</th><th>Revenue Unlocked</th><th>ROI</th></tr></thead>
-          <tbody id="hire_roi_table"></tbody>
-        </table>
-      </div>
-
-      <div class="note">
-        <strong>Sariah's model:</strong> She runs lean — started fully solo, brought in help for weddings first (a second person to run digital intake while she presses), then hired part-time fulfillment help as D2C volume scaled. The wedding assistant is the first hire because it doubles your event throughput with minimal cost. NINEMAGS LIVE specifically addresses the QR intake bottleneck so one person can handle the digital side while another presses.
+      <div class="legend">
+        <div class="leg-item"><div class="leg-dot" style="background:#2b6cb0"></div>Production</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#744210"></div>Fulfillment</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#553c9a"></div>Admin/CS</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#276749"></div>Social</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#b7791f"></div>Wedding (avg)</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#1a2030;border:1px dashed #2d3748"></div>Free time</div>
       </div>
     </div>
 
-    <!-- ============ PATH TAB ============ -->
-    <div class="view" id="tab-path">
+    <!-- ACTIVITY CARDS -->
+    <div class="activity-grid" id="activity_grid"></div>
 
-      <div class="tb">
-        <div class="tb-ttl">What You Need to Hit Each Revenue Target (Your Pricing)</div>
-        <table>
-          <thead><tr><th>Target</th><th>Wedding Base</th><th>D2C Orders Needed</th><th>Orders/Day</th><th>Hrs/Day (solo)</th><th>Key Unlock</th></tr></thead>
-          <tbody id="path_table"></tbody>
-        </table>
-      </div>
-
-      <div class="tb">
-        <div class="tb-ttl">Price Sensitivity — Volume Play vs. Modest Increase (same targets)</div>
-        <table>
-          <thead><tr><th>Price/Magnet</th><th>9-Pack AOV</th><th>Orders for $50K D2C</th><th>Orders for $1M/yr D2C</th><th>Hrs/Day at $1M target</th><th>Hire Needed?</th></tr></thead>
-          <tbody>
-            <tr><td class="y">$4.00</td><td class="y">$36.00</td><td class="y">1,389</td><td class="y">23,056/yr · 1,921/mo</td><td class="r">12.4+</td><td class="r">Yes, 2+ hires</td></tr>
-            <tr><td class="b">$4.50</td><td class="b">$40.50</td><td class="b">1,235</td><td class="b">20,494/yr · 1,708/mo</td><td class="y">10.9</td><td class="y">Yes, 1–2 hires</td></tr>
-            <tr><td class="b">$5.00</td><td class="b">$45.00</td><td class="b">1,111</td><td class="b">18,444/yr · 1,537/mo</td><td class="y">9.8</td><td class="y">1 hire at scale</td></tr>
-            <tr><td class="g">$6.00</td><td class="g">$54.00</td><td class="g">926</td><td class="g">15,370/yr · 1,281/mo</td><td class="g">8.2</td><td class="g">1 part-time hire</td></tr>
-            <tr><td class="g">$7.00</td><td class="g">$63.00</td><td class="g">794</td><td class="g">13,175/yr · 1,098/mo</td><td class="g">7.0</td><td class="g">Solo or 1 PT hire</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="note warn">
-        <strong>Volume play labor warning:</strong> The honest trade-off at $4.50/magnet is that you need ~1,700 D2C orders/month to hit $1M/year (net of weddings). At <span id="path_warn_hrs">–</span> hrs/order that's <span id="path_warn_total">–</span> hours/day just in D2C production + fulfillment — that's a full-time employee before you even do weddings or social. The math only works solo up to about 600–700 orders/month. Above that, you need help, which is totally fine if you've modeled it.
-      </div>
-
-      <div class="note good">
-        <strong>The compounding weddings strategy:</strong> Every wedding you do is content. A single wedding video of guests getting their magnets gets 50K–500K views. Those views convert to D2C orders, wedding booking inquiries, and eventually kit buyer interest. Sariah's growth loop: wedding video → viral → more D2C orders + more wedding bookings → revenue → more content. This is why the wedding channel is the seed of everything, not just a revenue line.
-      </div>
+    <!-- MAGNETS/DAY DETAIL -->
+    <div class="tb">
+      <div class="tb-ttl">Production Breakdown — What the Numbers Mean</div>
+      <table>
+        <thead><tr><th>Metric</th><th>Calculation</th><th>Per Day</th><th>Per Week</th><th>Per Month</th></tr></thead>
+        <tbody id="prod_detail_tbl"></tbody>
+      </table>
     </div>
 
-  </div><!-- /main -->
+    <div id="labor_note_box"></div>
+  </div>
+
+  <!-- ====== WEEK TAB ====== -->
+  <div class="view" id="tab-week">
+    <div class="note"><strong>Your week at a glance.</strong> Each column is a day; blocks represent hours of each activity. Wedding days (typically Thu–Sat) are highlighted orange. Batch your fulfillment runs and USPS trips to save time.</div>
+    <div class="week-grid" id="week_grid"></div>
+    <div class="tb">
+      <div class="tb-ttl">Weekly Hours Summary</div>
+      <table>
+        <thead><tr><th>Activity</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th><th>Total/Wk</th></tr></thead>
+        <tbody id="week_tbl"></tbody>
+      </table>
+    </div>
+    <div class="note warn"><strong>Batch filming tip:</strong> Dedicate one morning/week to filming 5–7 videos in a single session. This is how both Sariah and Alesia make consistent posting sustainable — 2–3 hours once a week can fuel your entire social calendar rather than 30–90 minutes every day.</div>
+  </div>
+
+  <!-- ====== HEADCOUNT TAB ====== -->
+  <div class="view" id="tab-heads">
+    <div class="note good"><strong>Heads = actual people, actual hours.</strong> This is not a dollar model — it's a time model. Each phase shows who does what, how many hours they work, and what it actually looks like operationally. Your current order volume is highlighted.</div>
+    <div class="headcount-timeline" id="hc_timeline"></div>
+  </div>
+
+  <!-- ====== SCALE TRIGGERS TAB ====== -->
+  <div class="view" id="tab-scale">
+    <div class="tb">
+      <div class="tb-ttl">Order Volume → Solo Hours → Hire Trigger</div>
+      <table>
+        <thead><tr><th>Orders/mo</th><th>Mags/Day</th><th>Prod hrs/day</th><th>Fulfill hrs/day</th><th>Total hrs/day (+ social + wed)</th><th>Status</th></tr></thead>
+        <tbody id="scale_tbl"></tbody>
+      </table>
+    </div>
+    <div class="tb">
+      <div class="tb-ttl">The Real Hire Triggers — Hours, Not Dollars</div>
+      <table>
+        <thead><tr><th>Hire</th><th>When (hours/day)</th><th>Hours They Take</th><th>Hours You Get Back</th><th>What You Do With Them</th></tr></thead>
+        <tbody>
+          <tr><td style="font-weight:700;color:#d69e2e">Wedding Assistant</td><td>Day 1 — first wedding</td><td>5–6 hrs/event</td><td class="g">5–6 hrs/event</td><td>You press; they run QR intake + queue. Scales to 150+ guests.</td></tr>
+          <tr><td style="font-weight:700;color:#68d391">PT Fulfillment (10 hr/wk)</td><td>>8 hrs/day total</td><td>10 hrs/wk</td><td class="g">1.5–2 hrs/day</td><td>Content creation, wedding bookings, strategy</td></tr>
+          <tr><td style="font-weight:700;color:#63b3ed">PT Production (20 hr/wk)</td><td>>9 hrs/day OR 800+ orders</td><td>20 hrs/wk</td><td class="g">3–4 hrs/day</td><td>You shift to pure content + sales. They run the machine.</td></tr>
+          <tr><td style="font-weight:700;color:#f6ad55">FT Ops Manager</td><td>1,500+ orders/mo</td><td>40 hrs/wk</td><td class="g">Full ops</td><td>You do weddings, content, strategy only.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tb">
+      <div class="tb-ttl">Revenue per Hour — Where to Focus Your Own Time</div>
+      <table>
+        <thead><tr><th>Activity</th><th>Your Hrs/Week</th><th>Revenue Impact</th><th>$/Hr (est.)</th><th>Priority</th></tr></thead>
+        <tbody id="rev_hr_tbl"></tbody>
+      </table>
+    </div>
+  </div>
+</div><!-- /main -->
 </div><!-- /layout -->
 
 <script>
+const COLORS={prod:'#2b6cb0',fulfill:'#744210',admin:'#553c9a',social:'#276749',wedding:'#b7791f',free:'#1a2030'};
+
 function fmt(n,d=0){if(Math.abs(n)>=1e6)return'$'+(n/1e6).toFixed(2)+'M';if(Math.abs(n)>=1000)return'$'+(n/1000).toFixed(Math.abs(n)>=10000?0:1)+'K';return'$'+n.toFixed(d).replace(/\B(?=(\d{3})+(?!\d))/g,',');}
-function fmtN(n,d=0){return n.toFixed(d).replace(/\B(?=(\d{3})+(?!\d))/g,',');}
-function pct(a,b){return b>0?Math.round(a/b*100)+'%':'0%';}
-function cls(v,lo,hi){return v<=lo?'g':v<=hi?'y':'r';}
+function fn(n,d=1){return n.toFixed(d);}
+function fmtN(n){return Math.round(n).toLocaleString();}
 function g(id){return parseFloat(document.getElementById('r_'+id).value);}
 
-const ids=['price','qty','orders','artprem','artpct','sets','setval','wed','wedprice','posts','hrpost','adspend','adroi','presstime','packtime','admintime','wedtime','cogs','ship','fixed'];
+const ids=['price','qty','orders','artprem','artpct','sets','setval','wed','wedprice','wedtime','posts','hrpost','adspend','adroi','presstime','packtime','admintime','cogs','ship','fixed'];
 ids.forEach(id=>{
   const el=document.getElementById('r_'+id);
   const lbl=document.getElementById('lbl_'+id);
@@ -436,280 +371,330 @@ function updateLbl(id){
   const v=parseFloat(document.getElementById('r_'+id).value);
   const lbl=document.getElementById('lbl_'+id);
   if(!lbl)return;
-  const map={price:'$d2',qty:'n',orders:'n',artprem:'+$d2',artpct:'n%',sets:'n',setval:'$n',wed:'f1',wedprice:'$K',posts:'n',hrpost:'f1',adspend:'$K',adroi:'f1x',presstime:'n',packtime:'f1',admintime:'f2',wedtime:'f1',cogs:'$d2',ship:'$d2',fixed:'$K'};
-  const t=map[id]||'n';
-  if(t==='$d2') lbl.textContent='$'+v.toFixed(2);
-  else if(t==='+$d2') lbl.textContent='+$'+v.toFixed(2);
-  else if(t==='n') lbl.textContent=fmtN(v);
-  else if(t==='n%') lbl.textContent=v+'%';
-  else if(t==='f1') lbl.textContent=v.toFixed(1);
-  else if(t==='f2') lbl.textContent=v.toFixed(2);
-  else if(t==='f1x') lbl.textContent=v.toFixed(1)+'x';
+  const m={price:'$2',qty:'0',orders:'0',artprem:'+$2',artpct:'0%',sets:'0',setval:'$0',wed:'1',wedprice:'$K',wedtime:'1',posts:'0',hrpost:'1',adspend:'$K',adroi:'1x',presstime:'0',packtime:'1',admintime:'2',cogs:'$2',ship:'$2',fixed:'$K'};
+  const t=m[id]||'0';
+  if(t==='$2') lbl.textContent='$'+v.toFixed(2);
+  else if(t==='+$2') lbl.textContent='+$'+v.toFixed(2);
+  else if(t==='0') lbl.textContent=Math.round(v).toLocaleString();
+  else if(t==='0%') lbl.textContent=v+'%';
+  else if(t==='1') lbl.textContent=v.toFixed(1);
+  else if(t==='2') lbl.textContent=v.toFixed(2);
+  else if(t==='$0') lbl.textContent='$'+Math.round(v);
   else if(t==='$K') lbl.textContent='$'+Math.round(v).toLocaleString();
+  else if(t==='1x') lbl.textContent=v.toFixed(1)+'x';
 }
 
 function recalc(){
-  // inputs
   const price=g('price'),qty=g('qty'),orders=g('orders');
   const artprem=g('artprem'),artpct=g('artpct')/100;
   const sets=g('sets'),setval=g('setval');
-  const wed=g('wed'),wedprice=g('wedprice');
+  const wed=g('wed'),wedprice=g('wedprice'),wedtime=g('wedtime');
   const posts=g('posts'),hrpost=g('hrpost'),adspend=g('adspend'),adroi=g('adroi');
-  const presstime=g('presstime'),packtime=g('packtime'),admintime=g('admintime'),wedtime=g('wedtime');
+  const presstime=g('presstime'),packtime=g('packtime'),admintime=g('admintime');
   const cogs=g('cogs'),ship=g('ship'),fixed=g('fixed');
 
-  // --- REVENUE ---
-  const aov=qty*price + qty*artprem*artpct;
-  const blendedAov=(orders+sets)>0?(orders*aov+sets*setval)/(orders+sets):aov;
+  // ---- REVENUE ----
+  const aov=qty*price+qty*artprem*artpct;
   const adOrders=adspend>0?Math.floor((adspend*adroi)/aov):0;
   const totalOrders=orders+adOrders;
-
-  const ch1=totalOrders*aov;
-  const ch2=sets*setval;
-  const ch3=wed*4.33*wedprice;
-  const ch4=adspend>0?(adspend*adroi-adspend):0; // net ad rev already counted in ch1 via adOrders, ch4 shows incremental
-  const total=ch1+ch2+ch3;
-  const annual=total*12;
-
-  // --- COSTS ---
-  const magD2C=totalOrders*qty+sets*4;
-  const magWed=wed*4.33*120;
-  const cogsCost=(magD2C+magWed)*cogs;
+  const ch1=totalOrders*aov, ch2=sets*setval, ch3=wed*4.33*wedprice;
+  const total=ch1+ch2+ch3, annual=total*12;
+  const cogsCost=(totalOrders*qty+sets*4+wed*4.33*120)*cogs;
   const shipCost=(totalOrders+sets)*ship;
   const wedCost=ch3*0.12;
-  const totalCosts=cogsCost+shipCost+wedCost+fixed+adspend;
-  const net=total-totalCosts;
+  const net=total-cogsCost-shipCost-wedCost-fixed-adspend;
   const margin=total>0?Math.round(net/total*100):0;
 
-  // --- LABOR (daily) ---
-  const printTimePerMag=(presstime/3600); // hrs, print is ~half press time
-  const pressTimePerMag=(presstime/3600);
-  const totalTimePerMag=printTimePerMag+pressTimePerMag; // print + press
-  const magsPerDay=magD2C/30;
-  const prodHrsDay=magsPerDay*totalTimePerMag;
+  // ---- LABOR (daily hours) ----
+  const magsPerDay=totalOrders*qty/30;
+  // print: 12 sec/sheet, ~5 mags/sheet
+  const printHrsDay=magsPerDay*(12/3600/5);
+  // press+cut
+  const pressHrsDay=magsPerDay*(presstime/3600);
+  const prodHrsDay=printHrsDay+pressHrsDay;
+  // fulfillment
   const packHrsDay=(totalOrders+sets)/30*(packtime/60);
-  const uspsHrsDay=0.4; // 30 min pickup/dropoff daily flat
-  const fulfillHrsDay=packHrsDay+uspsHrsDay;
-  const adminHrsDay=admintime;
-  const socialHrsDay=(posts*hrpost)/7;
-  const wedHrsDay=(wed*wedtime)/7;
-  const totalHrsDay=prodHrsDay+fulfillHrsDay+adminHrsDay+socialHrsDay+wedHrsDay;
-  const totalHrsWeek=totalHrsDay*7;
+  const uspsHrsDay=0.5; // daily ship run
+  const fulHrsDay=packHrsDay+uspsHrsDay;
+  // admin
+  const admHrsDay=admintime;
+  // social (daily avg)
+  const socHrsDay=posts*hrpost/7;
+  // wedding daily avg
+  const wedHrsDay=wed*wedtime/7;
+  const totalHrsDay=prodHrsDay+fulHrsDay+admHrsDay+socHrsDay+wedHrsDay;
+  const freeHrs=Math.max(0,16-totalHrsDay);
+  const dolPerHr=totalHrsDay>0?Math.round(net/(totalHrsDay*30)):0;
 
-  // $/hr
-  const dollarPerHr=totalHrsDay>0?Math.round(net/(totalHrsDay*30)):0;
-
-  // --- UPDATE REVENUE TAB ---
+  // ---- REVENUE TAB ----
   document.getElementById('aov_val').textContent=fmt(aov,2);
-  document.getElementById('aov_sub').textContent=`${qty} × $${price.toFixed(2)} + art`;
+  document.getElementById('aov_sub').textContent=qty+' × $'+price.toFixed(2)+' + art';
   document.getElementById('total_mo').textContent=fmt(total);
-  document.getElementById('annual_sub').textContent=fmt(annual)+'/year run rate';
+  document.getElementById('annual_sub').textContent=fmt(annual)+'/yr';
   document.getElementById('net_mo').textContent=fmt(net);
   document.getElementById('margin_sub').textContent=margin+'% net margin';
-  document.getElementById('perhour').textContent='$'+Math.max(0,dollarPerHr);
-  document.getElementById('perhour_sub').textContent=fmtN(totalHrsDay,1)+' hrs/day total work';
+  document.getElementById('perhour').textContent='$'+Math.max(0,dolPerHr);
+  document.getElementById('perhour_sub').textContent=fn(totalHrsDay,1)+' hrs/day total';
 
-  document.getElementById('sc_you_rev').textContent=fmt(total);
-  document.getElementById('sc_you_mo').textContent=`per month · ${fmt(annual)}/yr`;
-  document.getElementById('sc_you_note').textContent=`${fmtN(totalOrders)} D2C + ${fmtN(sets)} sets + ${wed.toFixed(1)} wed/wk`;
-
-  const sg=100000-total,mg=83333-total;
-  document.getElementById('sc_sariah_note').textContent=total>=100000?'✅ Matched Sariah!':`Gap: ${fmt(sg)}/mo — need ${fmtN(Math.ceil(sg/aov))} more D2C orders`;
-  document.getElementById('sc_mill_note').textContent=total>=83333?'✅ $1M/yr hit!':`Gap: ${fmt(mg)}/mo · ${fmt(mg*12)} to $1M/yr`;
-
-  const bMax=Math.max(ch1,ch2,ch3,1);
   ['1','2','3'].forEach((n,i)=>{
-    const v=[ch1,ch2,ch3][i];
-    document.getElementById('bar'+n).style.width=Math.round(v/Math.max(total,1)*100)+'%';
+    const rv=[ch1,ch2,ch3][i];
+    document.getElementById('bar'+n).style.width=Math.round(rv/Math.max(total,1)*100)+'%';
   });
   document.getElementById('ch1r').textContent=fmt(ch1);
-  document.getElementById('ch1d').textContent=`${fmtN(totalOrders)} orders × ${fmt(aov,2)} AOV${adOrders>0?' (incl. '+adOrders+' from ads)':''}`;
-  document.getElementById('ch1p').textContent=pct(ch1,total)+' of revenue';
+  document.getElementById('ch1d').textContent=fmtN(totalOrders)+' orders × '+fmt(aov,2);
+  document.getElementById('ch1p').textContent=Math.round(ch1/Math.max(total,1)*100)+'% of rev';
   document.getElementById('ch2r').textContent=fmt(ch2);
-  document.getElementById('ch2d').textContent=`${fmtN(sets)} set orders × ${fmt(setval,0)}`;
-  document.getElementById('ch2p').textContent=pct(ch2,total)+' of revenue';
+  document.getElementById('ch2d').textContent=fmtN(sets)+' set orders × '+fmt(setval,0);
+  document.getElementById('ch2p').textContent=Math.round(ch2/Math.max(total,1)*100)+'% of rev';
   document.getElementById('ch3r').textContent=fmt(ch3);
-  document.getElementById('ch3d').textContent=`${wed.toFixed(1)}/wk × ${fmt(wedprice)} × 4.33`;
-  document.getElementById('ch3p').textContent=pct(ch3,total)+' of revenue';
-  const ch4rEl=document.getElementById('ch4r');
-  ch4rEl.textContent=adspend>0?`${fmt(adspend)} spend → ${fmt(adspend*adroi)} revenue`:'No ad spend yet';
-  document.getElementById('ch4d').textContent=adspend>0?`${adroi.toFixed(1)}x ROAS — ${adOrders} extra orders/mo`:'Slide "monthly ad spend" to model';
-  document.getElementById('ch4p').textContent=adspend>0?pct(adOrders*aov,total)+' of revenue':'—';
-  document.getElementById('bar4').style.width=pct(adOrders*aov,Math.max(total,1));
-  document.getElementById('total_rev').textContent=fmt(total);
-  document.getElementById('annual_rev2').textContent=fmt(annual)+'/year run rate';
+  document.getElementById('ch3d').textContent=wed.toFixed(1)+'/wk × '+fmt(wedprice)+' × 4.33';
+  document.getElementById('ch3p').textContent=Math.round(ch3/Math.max(total,1)*100)+'% of rev';
+  document.getElementById('total_rev2').textContent=fmt(total);
+  document.getElementById('annual_rev').textContent=fmt(annual)+'/yr';
 
-  // profit table
-  const profRows=[
+  document.getElementById('profit_tbl').innerHTML=[
     {l:'Gross Revenue',a:total,n:'All channels',c:'b'},
-    {l:'Consumables ('+fmtN(Math.round(magD2C+magWed))+' magnets)',a:-cogsCost,n:'$'+cogs.toFixed(2)+'/magnet',c:'y'},
-    {l:'Shipping (D2C + sets)',a:-shipCost,n:fmtN(totalOrders+sets)+' orders × $'+ship.toFixed(2),c:'y'},
-    {l:'Wedding supplies/travel',a:-wedCost,n:'~12% of event rev',c:'y'},
+    {l:'Consumables',a:-cogsCost,n:'$'+cogs.toFixed(2)+'/magnet',c:'y'},
+    {l:'Shipping',a:-shipCost,n:fmtN(totalOrders+sets)+' orders',c:'y'},
+    {l:'Wedding costs',a:-wedCost,n:'12% of event rev',c:'y'},
     {l:'Ad spend',a:-adspend,n:adspend>0?adroi.toFixed(1)+'x ROAS':'No ads',c:'y'},
     {l:'Fixed overhead',a:-fixed,n:'NINEMAGS + Shopify + packaging',c:'y'},
     {l:'Net Profit',a:net,n:margin+'% margin · '+fmt(net*12)+'/yr',c:margin>=65?'g':margin>=40?'b':'r'},
-  ];
-  document.getElementById('profit_table').innerHTML=profRows.map(r=>`<tr><td>${r.l}</td><td class="${r.c}">${fmt(r.a)}</td><td style="color:#4a5568;font-size:10px">${r.n}</td><td class="${r.c}">${fmt(r.a)}</td></tr>`).join('');
+  ].map(r=>`<tr><td>${r.l}</td><td class="${r.c}">${fmt(r.a)}</td><td style="color:#4a5568;font-size:10px">${r.n}</td><td class="${r.c}">${fmt(r.a)}</td></tr>`).join('');
 
-  // --- LABOR TAB ---
-  document.getElementById('lhr_day').textContent=fmtN(totalHrsDay,1);
-  document.getElementById('lhr_day_sub').textContent=totalHrsDay>10?'⚠️ Over full-time':totalHrsDay>8?'⚠️ Heavy load':'✅ Manageable';
-  document.getElementById('lhr_prod').textContent=fmtN(prodHrsDay,1);
-  document.getElementById('lhr_ship').textContent=fmtN(fulfillHrsDay,1);
-  document.getElementById('lhr_wed').textContent=fmtN(wed*wedtime,1);
-  document.getElementById('lhr_wed_sub').textContent=`${wed.toFixed(1)} events × ${wedtime.toFixed(1)} hrs`;
-  document.getElementById('lhr_soc').textContent=fmtN(posts*hrpost,1);
-  document.getElementById('lhr_soc_sub').textContent=`${posts} posts × ${hrpost.toFixed(1)} hrs`;
+  // ---- YOUR DAY TAB ----
+  const wcBox=document.getElementById('wc_box');
+  wcBox.className='workday-callout '+(totalHrsDay>10?'wc-danger':totalHrsDay>8?'wc-warn':'wc-ok');
+  document.getElementById('wc_hrs').textContent=fn(totalHrsDay,1);
+  document.getElementById('wc_status').textContent=totalHrsDay>10?'Need help NOW':totalHrsDay>8?'Heavy — plan hire':totalHrsDay>6?'Full workday':'Sustainable';
+  document.getElementById('wd_prod').textContent=fn(prodHrsDay,1)+' hrs';
+  document.getElementById('wd_ful').textContent=fn(fulHrsDay,1)+' hrs';
+  document.getElementById('wd_adm').textContent=fn(admHrsDay,1)+' hrs';
+  document.getElementById('wd_soc').textContent=fn(socHrsDay,1)+' hrs';
+  document.getElementById('wd_wed').textContent=fn(wedHrsDay,1)+' hrs';
+  document.getElementById('wd_free').textContent=fn(freeHrs,1)+' hrs';
+  document.getElementById('wd_free').className='wc-row-val '+(freeHrs<2?'r':freeHrs<4?'y':'g');
 
-  const prodPct=Math.min(100,prodHrsDay/12*100);
-  const totalPct=Math.min(100,totalHrsDay/12*100);
-  const prodGauge=document.getElementById('gauge_prod').querySelector('.gauge');
-  prodGauge.className='gauge '+(prodHrsDay>6?'overload':prodHrsDay>4?'heavy':'ok');
-  document.getElementById('g_prod_val').textContent=fmtN(prodHrsDay,1)+' hrs/day';
-  document.getElementById('g_prod_sub').textContent=fmtN(Math.round(magsPerDay))+' magnets/day · '+fmtN(totalOrders+sets)+' orders/mo';
-  document.getElementById('g_prod_bar').style.width=prodPct+'%';
-  document.getElementById('g_prod_bar').style.background=prodHrsDay>6?'#fc8181':prodHrsDay>4?'#f6e05e':'#68d391';
-  const totGauge=document.getElementById('gauge_total').querySelector('.gauge');
-  totGauge.className='gauge '+(totalHrsDay>10?'overload':totalHrsDay>8?'heavy':'ok');
-  document.getElementById('g_total_val').textContent=fmtN(totalHrsDay,1)+' hrs/day';
-  document.getElementById('g_total_sub').textContent=totalHrsDay>10?'Needs hired help now':totalHrsDay>8?'Approaching capacity':totalHrsDay>6?'Full workday':'Comfortable';
-  document.getElementById('g_total_bar').style.width=totalPct+'%';
-  document.getElementById('g_total_bar').style.background=totalHrsDay>10?'#fc8181':totalHrsDay>8?'#f6e05e':'#68d391';
+  // Timeline bar (16 working hours = 6am–10pm)
+  const totalWorkHrs=16;
+  const segments=[
+    {cls:'tl-prod',hrs:prodHrsDay,label:'🖨️ Production'},
+    {cls:'tl-fulfill',hrs:fulHrsDay,label:'📦 Fulfill'},
+    {cls:'tl-admin',hrs:admHrsDay,label:'💻 Admin'},
+    {cls:'tl-social',hrs:socHrsDay,label:'📱 Social'},
+    {cls:'tl-wed',hrs:wedHrsDay,label:'💒 Wedding'},
+    {cls:'tl-free',hrs:freeHrs,label:'Free'},
+  ].filter(s=>s.hrs>0);
 
-  const laborRows=[
-    {task:'🖨️ Printing (ET-8500)',how:`${fmtN(Math.round(magsPerDay))} mags/day ÷ 5 per sheet × 12 sec/sheet`,day:fmtN(magsPerDay*(12/3600/5),2),week:fmtN(magsPerDay*(12/3600/5)*7,1),c:'b'},
-    {task:'🔧 Pressing + cutting',how:`${fmtN(Math.round(magsPerDay))} magnets × ${presstime} sec`,day:fmtN(prodHrsDay,2),week:fmtN(prodHrsDay*7,1),c:'b'},
-    {task:'📦 Packing orders',how:`${fmtN(totalOrders+sets)}/mo ÷ 30 × ${packtime} min`,day:fmtN(packHrsDay,2),week:fmtN(packHrsDay*7,1),c:'y'},
-    {task:'📮 USPS / ship run',how:'~30 min/day flat (or scheduled pickup)',day:'0.50',week:'3.5',c:'y'},
-    {task:'💻 Admin / CS / orders',how:'Email + Etsy messages + order review',day:fmtN(admintime,2),week:fmtN(admintime*7,1),c:'p'},
-    {task:'📱 Social media',how:`${posts} posts × ${hrpost.toFixed(1)} hrs ÷ 7`,day:fmtN(socialHrsDay,2),week:fmtN(posts*hrpost,1),c:'o'},
-    {task:'💒 Weddings',how:`${wed.toFixed(1)}/wk × ${wedtime.toFixed(1)} hrs ÷ 7`,day:fmtN(wedHrsDay,2),week:fmtN(wed*wedtime,1),c:'g'},
-    {task:'TOTAL',how:'',day:`<strong>${fmtN(totalHrsDay,1)}</strong>`,week:`<strong>${fmtN(totalHrsWeek,1)}</strong>`,c:totalHrsDay>10?'r':totalHrsDay>8?'y':'g',bold:true},
-  ];
-  document.getElementById('labor_table').innerHTML=laborRows.map(r=>`<tr><td${r.bold?' style="font-weight:700;color:#e2e8f0"':''}>${r.task}</td><td style="color:#4a5568;font-size:10px">${r.how}</td><td class="${r.c}">${r.day}</td><td class="${r.c}">${r.week}</td></tr>`).join('');
-
-  const wedHrTot=wed*wedtime*4.33;
-  const wedRevHr=wedHrTot>0?wedprice/(wedtime):0;
-  const d2cHrTot=(prodHrsDay+packHrsDay)*30;
-  const d2cRevHr=d2cHrTot>0?ch1/d2cHrTot:0;
-  const socHrTot=posts*hrpost*4.33;
-  const socRevHr=socHrTot>0?(total*0.4)/socHrTot:0; // rough: social drives ~40% of D2C indirectly
-
-  document.getElementById('rev_per_hour_table').innerHTML=[
-    {act:'💒 Wedding (event only)',hrs:fmtN(wed*wedtime,1)+' hrs/wk',rev:fmt(ch3),dhr:fmt(wedRevHr,0),c:wedRevHr>200?'g':wedRevHr>100?'y':'b'},
-    {act:'📦 D2C Production + Fulfillment',hrs:fmtN((prodHrsDay+packHrsDay)*7,1)+' hrs/wk',rev:fmt(ch1),dhr:fmt(d2cRevHr,0),c:d2cRevHr>30?'g':d2cRevHr>15?'y':'r'},
-    {act:'📱 Social Media',hrs:fmtN(posts*hrpost,1)+' hrs/wk',rev:'Indirect (~40% of D2C)',dhr:fmt(socRevHr,0)+' est.',c:'o'},
-    {act:'💻 Admin / CS',hrs:fmtN(admintime*7,1)+' hrs/wk',rev:'Overhead',dhr:'Cost center',c:'p'},
-  ].map(r=>`<tr><td>${r.act}</td><td class="b">${r.hrs}</td><td class="y">${r.rev}</td><td class="${r.c}">${r.dhr}</td></tr>`).join('');
-
-  const laborNotes=[];
-  if(totalHrsDay>10) laborNotes.push(`<div class="note danger"><strong>⚠️ Solo capacity exceeded:</strong> At ${fmtN(totalHrsDay,1)} hrs/day you're over a sustainable solo workload. You need at least 1 part-time hire (fulfillment/packing) immediately to protect quality and your own bandwidth.</div>`);
-  else if(totalHrsDay>8) laborNotes.push(`<div class="note warn"><strong>Heavy load:</strong> ${fmtN(totalHrsDay,1)} hrs/day is manageable but leaves no buffer for life, growth, or content creation. Plan your first hire at this level.</div>`);
-  else laborNotes.push(`<div class="note good"><strong>✅ Sustainable:</strong> ${fmtN(totalHrsDay,1)} hrs/day is a solid but manageable workload. You have bandwidth to create content, refine systems, and book more weddings.</div>`);
-  document.getElementById('labor_notes').innerHTML=laborNotes.join('');
-
-  // --- SOCIAL TAB ---
-  document.getElementById('soc_posts').textContent=posts;
-  document.getElementById('soc_posts_sub').textContent=posts<3?'Below minimum viable':posts<7?'Good cadence':'High output';
-  document.getElementById('soc_hrs').textContent=fmtN(posts*hrpost,1);
-  document.getElementById('soc_spend').textContent=fmt(adspend);
-  document.getElementById('soc_roas_sub').textContent=adspend>0?adroi.toFixed(1)+'x ROAS = '+fmt(adspend*adroi)+' revenue':'Organic only';
-  document.getElementById('soc_orders').textContent=fmtN(adOrders);
-  document.getElementById('soc_rev_sub').textContent=adOrders>0?fmt(adOrders*aov)+'/mo from paid':'Set ad spend to model';
-
-  document.getElementById('soc_bench_table').innerHTML=[
-    {op:'Heart Printed',plat:'IG Reels + TikTok + Facebook',pw:'5–7',fol:'1M+ IG',est:'~400–600/mo'},
-    {op:'Sariah (Memory Magnets Co.)',plat:'TikTok + IG + Threads',pw:'5–10',fol:'215K IG',est:'2,000–3,000+/mo'},
-    {op:'Magnet Moments Co.',plat:'Instagram primary',pw:'Unknown',fol:'Unknown','est':'Unknown'},
-    {op:`Your model (${posts}x/wk)`,plat:'TikTok + IG Reels (recommended)',pw:posts,fol:'Building',est:posts>=7?'~600–1,000/mo (goal)':posts>=4?'~200–400/mo':posts>=2?'~50–150/mo':'Minimal'},
-  ].map((r,i)=>`<tr${i===3?' style="border-top:1px solid #4a5568"':''}><td${i===3?' style="color:#63b3ed;font-weight:600"':''}>${r.op}</td><td style="color:#4a5568">${r.plat}</td><td class="${r.pw>=7?'g':r.pw>=4?'b':'y'}">${r.pw}</td><td>${r.fol}</td><td class="g">${r.est}</td></tr>`).join('');
-
-  document.getElementById('soc_scenario_table').innerHTML=[
-    [1,hrpost],[2,hrpost],[3,hrpost],[5,hrpost],[7,hrpost],[10,hrpost],[14,hrpost]
-  ].map(([p,h])=>{
-    const hrsWk=p*h,hrsMo=hrsWk*4.33;
-    const orderLift=p<2?50:p<4?150:p<6?300:p<8?600:p<11?1000:1800;
-    const revLift=orderLift*aov;
-    const dhr=hrsMo>0?revLift/hrsMo:0;
-    const isCurrent=p===posts;
-    return `<tr${isCurrent?' style="background:#1a2744;border-left:2px solid #4299e1"':''}><td${isCurrent?' class="b" style="font-weight:700"':''}>${p}x/wk${isCurrent?' ← you':''}</td><td>${fmtN(hrsWk,1)}</td><td>${fmtN(hrsMo,0)}</td><td>+${fmtN(orderLift)} orders est.</td><td class="g">${fmt(revLift)}</td><td class="${dhr>50?'g':dhr>25?'y':'r'}">${fmt(dhr,0)}/hr</td></tr>`;
+  document.getElementById('tl_labels').innerHTML=['6am','8am','10am','12pm','2pm','4pm','6pm','8pm','10pm'].map(t=>`<span>${t}</span>`).join('');
+  document.getElementById('tl_bar').innerHTML=segments.map(s=>{
+    const w=Math.round(s.hrs/totalWorkHrs*100);
+    return `<div class="tl-segment ${s.cls}" style="width:${w}%"><span>${w>=8?s.label:w>=5?s.label.split(' ')[0]:''}</span></div>`;
   }).join('');
 
-  document.getElementById('ads_table').innerHTML=[0,200,500,1000,2000,5000].map(spend=>{
-    if(spend===0) return `<tr><td class="p">No ads</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>`;
-    const roas=adroi;
-    const rev=spend*roas;
-    const extraOrders=Math.floor(rev/aov);
-    const netProfit=rev-spend-extraOrders*ship-extraOrders*qty*cogs;
-    const isCurrent=spend===adspend;
-    return `<tr${isCurrent?' style="background:#1a2744"':''}><td${isCurrent?' class="b" style="font-weight:700"':''}>${fmt(spend)}${isCurrent?' ← you':''}</td><td class="b">${roas.toFixed(1)}x</td><td class="y">${fmt(rev)}</td><td class="g">${fmt(netProfit)}</td><td>${fmtN(extraOrders)}</td></tr>`;
-  }).join('');
-
-  document.getElementById('soc_time_warn').textContent=posts;
-  document.getElementById('soc_hrpost_warn').textContent=hrpost.toFixed(1);
-  document.getElementById('soc_total_warn').textContent=fmtN(posts*hrpost*4.33,0)+' hrs';
-  document.getElementById('soc_equiv_warn').textContent=Math.round(posts*hrpost*4.33/160*100)+'%';
-
-  // --- SCALE TAB ---
-  const scaleRows=[100,200,400,600,800,1200,1800,2500,3500].map(ord=>{
-    const magsPD=ord*qty/30;
-    const pPD=magsPD*presstime/3600;
-    const fPD=ord/30*(packtime/60)+0.4;
-    const aPD=admintime;
-    const tot=pPD+fPD+aPD+socialHrsDay+wedHrsDay;
-    const isCurrent=Math.abs(ord-orders)<100;
-    const sc=tot>10?'r':tot>8?'y':'g';
-    return `<tr${isCurrent?' style="background:#1a2744"':''}><td${isCurrent?' class="b" style="font-weight:700"':''}>${fmtN(ord)}${isCurrent?' ← you':''}</td><td class="${pPD>5?'r':pPD>3?'y':'g'}">${fmtN(pPD,1)}</td><td class="${fPD>3?'r':fPD>2?'y':'g'}">${fmtN(fPD,1)}</td><td class="p">${fmtN(aPD,1)}</td><td class="${sc}">${fmtN(tot,1)}</td><td class="${sc}">${tot>10?'🔴 Need help now':tot>8?'🟡 Plan hire soon':tot>6?'🟢 Full workday':'🟢 Comfortable'}</td></tr>`;
-  }).join('');
-  document.getElementById('scale_table').innerHTML=scaleRows;
-
-  const hireData=[
-    {role:'Wedding Assistant',when:'First wedding',trigger:wed>=1,soon:false,det:'Second person at events: handles QR intake + order queue while you press. Cost: ~$15–20/hr × 5–6 hrs/event = $75–120/event. At $1,500/event this is a no-brainer — they also let you do 150-guest weddings solo-operator-free.'},
-    {role:'Part-Time Fulfillment (10 hrs/wk)',when:'400–600 orders/mo',trigger:orders>=400,soon:orders>=300,det:'Packing + labeling + USPS runs. ~10 hrs/wk at $15–17/hr = $650–720/mo. Frees 1.5–2 hrs/day for content creation and growth. ROI: you can scale D2C 30–50% faster without burning out.'},
-    {role:'Part-Time Production (20 hrs/wk)',when:'800–1,000 orders/mo',trigger:orders>=800,soon:orders>=600,det:'Handle printing + pressing. ~20 hrs/wk = $1,300–1,500/mo. At this order volume your D2C generates $25K+/mo — easily covers this hire with significant margin left.'},
-    {role:'Full-Time Operations Manager',when:'1,500+ orders/mo',trigger:orders>=1500,soon:orders>=1000,det:'Full fulfillment + production + light CS. ~40 hrs/wk = $2,400–3,000/mo. At 1,500+ orders your revenue is $50K+/mo and you need to be doing content + weddings + strategy, not packing boxes.'},
+  // Activity cards
+  const acts=[
+    {icon:'🖨️',name:'Production',sub:`${fmtN(Math.round(magsPerDay))} magnets/day · print + press + cut`,hrs:prodHrsDay,color:COLORS.prod,cls:'b'},
+    {icon:'📦',name:'Fulfillment',sub:`${fmtN(Math.round((totalOrders+sets)/30))} orders/day packed + ship run`,hrs:fulHrsDay,color:COLORS.fulfill,cls:'y'},
+    {icon:'💻',name:'Admin / CS',sub:'Order review, emails, Etsy messages',hrs:admHrsDay,color:COLORS.admin,cls:'p'},
+    {icon:'📱',name:'Social Content',sub:`${posts} posts/wk × ${hrpost.toFixed(1)} hrs · ${fn(posts*hrpost,1)} hrs/wk total`,hrs:socHrsDay,color:COLORS.social,cls:'g'},
+    {icon:'💒',name:'Weddings',sub:`${wed.toFixed(1)}/wk × ${wedtime.toFixed(1)} hrs · daily avg`,hrs:wedHrsDay,color:COLORS.wedding,cls:'o'},
+    {icon:'🕐',name:'Free Time',sub:`${freeHrs<2?'⚠️ Barely any room left':freeHrs<4?'Tight but workable':'Room to breathe and grow'}`,hrs:freeHrs,color:COLORS.free,cls:freeHrs<2?'r':freeHrs<4?'y':'g'},
   ];
-  document.getElementById('hire_cards').innerHTML=hireData.map(h=>`
-    <div class="hire-card${h.trigger?' trigger':h.soon?' soon':''}">
-      <div class="hc-head"><div class="hc-role">${h.role}</div><div class="hc-when">${h.trigger?'⚠️ Trigger hit now':h.soon?'📅 Plan this soon':'Future need'} · ${h.when}</div></div>
-      <div class="hc-det">${h.det}</div>
+  document.getElementById('activity_grid').innerHTML=acts.map(a=>{
+    const pct=Math.min(100,a.hrs/16*100);
+    return `<div class="act-card" style="border-left-color:${a.color}">
+      <div class="act-icon">${a.icon}</div>
+      <div class="act-info">
+        <div class="act-name">${a.name}</div>
+        <div class="act-hrs ${a.cls}">${fn(a.hrs,1)}<span class="act-hrs-unit"> hrs/day</span></div>
+        <div class="act-sub">${a.sub}</div>
+      </div>
+      <div class="act-bar">
+        <div class="act-bar-track"><div class="act-bar-fill" style="background:${a.color};height:${pct}%"></div></div>
+        <div class="act-bar-pct">${Math.round(pct)}%</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Production detail table
+  document.getElementById('prod_detail_tbl').innerHTML=[
+    {m:'Total D2C orders',c:'÷ 30 days',d:fn((totalOrders)/30,1),w:fn((totalOrders)/30*7,0),mo:fmtN(totalOrders),cls:'b'},
+    {m:'Magnets to make',c:`orders × ${qty} magnets`,d:fmtN(Math.round(magsPerDay)),w:fmtN(Math.round(magsPerDay*7)),mo:fmtN(Math.round(magsPerDay*30)),cls:'b'},
+    {m:'Print time',c:`÷ 5 per sheet × 12 sec/sheet`,d:fn(printHrsDay,2)+' hrs',w:fn(printHrsDay*7,1)+' hrs',mo:fn(printHrsDay*30,1)+' hrs',cls:'b'},
+    {m:'Press + cut time',c:`${fmtN(Math.round(magsPerDay))} mags × ${presstime}s`,d:fn(pressHrsDay,2)+' hrs',w:fn(pressHrsDay*7,1)+' hrs',mo:fn(pressHrsDay*30,1)+' hrs',cls:'b'},
+    {m:'Pack + label',c:`${fn((totalOrders+sets)/30,1)} orders/day × ${packtime.toFixed(1)} min`,d:fn(packHrsDay,2)+' hrs',w:fn(packHrsDay*7,1)+' hrs',mo:fn(packHrsDay*30,1)+' hrs',cls:'y'},
+    {m:'Ship run (USPS)',c:'~30 min/day flat',d:'0.50 hrs',w:'3.5 hrs',mo:'15 hrs',cls:'y'},
+    {m:'Total production+fulfill',c:'',d:`<strong>${fn(prodHrsDay+fulHrsDay,1)} hrs</strong>`,w:`<strong>${fn((prodHrsDay+fulHrsDay)*7,1)} hrs</strong>`,mo:`<strong>${fn((prodHrsDay+fulHrsDay)*30,0)} hrs</strong>`,cls:'w'},
+  ].map(r=>`<tr><td class="${r.cls}">${r.m}</td><td style="color:#4a5568;font-size:10px">${r.c}</td><td class="${r.cls}">${r.d}</td><td class="${r.cls}">${r.w}</td><td class="${r.cls}">${r.mo}</td></tr>`).join('');
+
+  const laborNote=totalHrsDay>10
+    ?`<div class="note danger"><strong>⚠️ You need help now.</strong> ${fn(totalHrsDay,1)} hrs/day is not sustainable solo. Hire part-time fulfillment (~10 hrs/wk) immediately — that's ${fn(fulHrsDay,1)} hrs/day back. Costs ~$650/mo at $15/hr.</div>`
+    :totalHrsDay>8
+    ?`<div class="note warn"><strong>Heavy workday — start planning your first hire.</strong> ${fn(totalHrsDay,1)} hrs/day leaves little room for anything going wrong, let alone growing. A part-time packer 10 hrs/week at $15/hr = $650/mo and gives you ~${fn(fulHrsDay,1)} hours back daily.</div>`
+    :`<div class="note good"><strong>✅ Sustainable solo workload.</strong> ${fn(totalHrsDay,1)} hrs/day. You have ${fn(freeHrs,1)} hours of buffer — use it for content creation, wedding outreach, and building your brand before you need to hire.</div>`;
+  document.getElementById('labor_note_box').innerHTML=laborNote;
+
+  // ---- WEEK TAB ----
+  // Assume: wed on Thu, Fri, Sat (if wed>0)
+  const daysOfWeek=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const wedDays=[3,4,5]; // Thu=3, Fri=4, Sat=5 index
+  const wedsPerWeek=wed;
+  // distribute weddings across Thu/Fri/Sat
+  const wedPerDay=wedsPerWeek<=1?[0,0,0,wedsPerWeek>0?1:0,0,0,0]:
+    wedsPerWeek<=2?[0,0,0,1,1,0,0]:
+    wedsPerWeek<=3?[0,0,0,1,1,1,0]:
+    [0,0,0,1,1,2,0];
+
+  const weekData=daysOfWeek.map((d,i)=>{
+    const isWedDay=wedPerDay[i]>0;
+    const dayWedHrs=wedPerDay[i]*wedtime;
+    // social: batch on Tuesday + Thursday
+    const daySocHrs=(i===1||i===3)?Math.min(posts*hrpost/2, posts*hrpost):(posts*hrpost/7)*0.5;
+    // adjust social for batch (cap per day)
+    const daySocHrsCapped=Math.min(daySocHrs, hrpost*3);
+    // admin every day
+    const dayAdmHrs=admintime;
+    // production: 6 days (not Sunday unless needed)
+    const dayProdHrs=i===6?prodHrsDay*0.3:prodHrsDay;
+    const dayFulHrs=i===6?0:fulHrsDay;
+    const dayTotal=dayProdHrs+dayFulHrs+dayAdmHrs+daySocHrsCapped+dayWedHrs;
+    return {d,isWedDay,prod:dayProdHrs,ful:dayFulHrs,adm:dayAdmHrs,soc:daySocHrsCapped,wed:dayWedHrs,total:dayTotal};
+  });
+
+  const maxDay=Math.max(...weekData.map(d=>d.total),1);
+  const blockH=100; // max height in px equivalent (we use % of 80px)
+
+  document.getElementById('week_grid').innerHTML=weekData.map((d,i)=>{
+    const isWed=wedPerDay[i]>0;
+    return `<div class="day-col${isWed?' weekend':''}">
+      <div class="day-name">${d.d}</div>
+      <div class="day-stack">
+        ${d.prod>0?`<div class="day-block" style="background:#2b6cb0;height:${Math.max(4,Math.round(d.prod/maxDay*80))}px" title="Production: ${fn(d.prod,1)}hr">${d.prod>1?fn(d.prod,1)+'h':''}</div>`:''}
+        ${d.ful>0?`<div class="day-block" style="background:#744210;height:${Math.max(4,Math.round(d.ful/maxDay*80))}px" title="Fulfillment: ${fn(d.ful,1)}hr">${d.ful>1?fn(d.ful,1)+'h':''}</div>`:''}
+        ${d.adm>0?`<div class="day-block" style="background:#553c9a;height:${Math.max(4,Math.round(d.adm/maxDay*80))}px" title="Admin: ${fn(d.adm,1)}hr">${d.adm>0.5?fn(d.adm,1)+'h':''}</div>`:''}
+        ${d.soc>0?`<div class="day-block" style="background:#276749;height:${Math.max(4,Math.round(d.soc/maxDay*80))}px" title="Social: ${fn(d.soc,1)}hr">${d.soc>0.5?fn(d.soc,1)+'h':''}</div>`:''}
+        ${d.wed>0?`<div class="day-block" style="background:#b7791f;height:${Math.max(4,Math.round(d.wed/maxDay*80))}px" title="Wedding: ${fn(d.wed,1)}hr">${fn(d.wed,1)+'h'}</div>`:''}
+        <div style="font-size:10px;text-align:center;color:${d.total>10?'#fc8181':d.total>8?'#f6e05e':'#68d391'};padding:3px 0;font-weight:700">${fn(d.total,1)}h</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('week_tbl').innerHTML=[
+    {act:'🖨️ Production',data:weekData.map(d=>d.prod),cls:'b'},
+    {act:'📦 Fulfillment',data:weekData.map(d=>d.ful),cls:'y'},
+    {act:'💻 Admin',data:weekData.map(d=>d.adm),cls:'p'},
+    {act:'📱 Social',data:weekData.map(d=>d.soc),cls:'g'},
+    {act:'💒 Wedding',data:weekData.map(d=>d.wed),cls:'o'},
+    {act:'TOTAL',data:weekData.map(d=>d.total),cls:'w',bold:true},
+  ].map(r=>{
+    const tot=r.data.reduce((a,b)=>a+b,0);
+    return `<tr><td${r.bold?' style="font-weight:700;color:#e2e8f0"':''}>${r.act}</td>${r.data.map(v=>`<td class="${r.cls}">${v>0?fn(v,1):'–'}</td>`).join('')}<td class="${r.cls}" style="font-weight:800">${fn(tot,1)}</td></tr>`;
+  }).join('');
+
+  // ---- HEADCOUNT TAB ----
+  const phases=[
+    {
+      label:'Phase 1',orders:'0–400 orders/mo',title:'Solo — You Do Everything',
+      active:orders<=400,
+      roles:[{t:'You (owner)',c:'role-you'},{t:'Wedding: bring a friend free',c:'role-wed'}],
+      hrs:[
+        {k:'Production + Fulfill',v:fn(prodHrsDay+fulHrsDay,1)+' hrs/day'},
+        {k:'Admin + Social',v:fn(admHrsDay+socHrsDay,1)+' hrs/day'},
+        {k:'Weddings',v:fn(wed*wedtime,1)+' hrs/wk'},
+        {k:'Total',v:fn(totalHrsDay,1)+' hrs/day'},
+      ],
+      heads:['you','ghost','ghost','ghost'],
+      note:'Fully manageable solo. Your free time is content creation time. Every wedding is a content opportunity.'
+    },
+    {
+      label:'Phase 2',orders:'400–800 orders/mo',title:'You + 1 Part-Time Fulfillment',
+      active:orders>400&&orders<=800,
+      roles:[{t:'You — production + content + weddings',c:'role-you'},{t:'PT Fulfillment — 10 hrs/wk pack + ship',c:'role-pt'}],
+      hrs:[
+        {k:'Your hours/day',v:fn(Math.max(0,totalHrsDay-fulHrsDay),1)+' hrs/day (down from '+fn(totalHrsDay,1)+')'},
+        {k:'PT hire hours',v:'10 hrs/wk (~2 hrs/day)'},
+        {k:'PT hire cost',v:'~$650–720/mo at $15–17/hr'},
+        {k:'Hours freed for you',v:fn(fulHrsDay,1)+' hrs/day back'},
+      ],
+      heads:['you','pt','ghost','ghost'],
+      note:'The PT hire pays for itself in 1–2 extra D2C orders per day. You use reclaimed time for content and wedding bookings.'
+    },
+    {
+      label:'Phase 3',orders:'800–1,500 orders/mo',title:'You + PT Fulfill + PT Production',
+      active:orders>800&&orders<=1500,
+      roles:[{t:'You — content + weddings + strategy',c:'role-you'},{t:'PT Fulfillment — 10 hrs/wk',c:'role-pt'},{t:'PT Production — 20 hrs/wk press + print',c:'role-pt'}],
+      hrs:[
+        {k:'Your focus',v:'Social content, wedding bookings, brand'},
+        {k:'PT Production hrs',v:'20 hrs/wk · $1,300–1,500/mo'},
+        {k:'PT Fulfill hrs',v:'10 hrs/wk · $650–720/mo'},
+        {k:'Total team hrs/wk',v:'~70 hrs production + yours'},
+      ],
+      heads:['you','pt','pt','ghost'],
+      note:'At this scale your D2C alone generates $25K+/mo. Two part-time hires (~$2,000/mo) free you to be the face of the brand.'
+    },
+    {
+      label:'Phase 4',orders:'1,500+ orders/mo',title:'You + Full-Time Ops Manager',
+      active:orders>1500,
+      roles:[{t:'You — content + weddings + kits strategy',c:'role-you'},{t:'FT Ops Manager — all fulfillment + production + CS',c:'role-ft'}],
+      hrs:[
+        {k:'FT Ops Manager',v:'40 hrs/wk · $2,400–3,000/mo'},
+        {k:'Your hours',v:'Content, weddings, biz dev only'},
+        {k:'Revenue at this scale',v:fmt(1500*aov+ch2+ch3)+'/mo+'},
+        {k:'Margin after hire',v:'Still 60–70%+'},
+      ],
+      heads:['you','hire','hire','ghost'],
+      note:'You\'ve built a real business. The ops manager runs the machine; you build the brand and the kit/course v2 revenue layer.'
+    },
+  ];
+
+  document.getElementById('hc_timeline').innerHTML=phases.map(p=>`
+    <div class="hc-phase${p.active?' active-phase':''}">
+      <div class="hc-header">
+        <div class="hc-phase-lbl">${p.label}</div>
+        <div>
+          <div class="hc-title">${p.title}</div>
+          <div class="hc-orders">${p.orders}</div>
+        </div>
+        <div class="hc-heads">
+          ${p.heads.map(h=>`<div class="head-dot ${h}">${h==='you'?'🧑':h==='pt'?'🙋':h==='hire'?'👤':'👤'}</div>`).join('')}
+        </div>
+      </div>
+      <div class="hc-body">
+        <div class="hc-roles">${p.roles.map(r=>`<span class="hc-role-tag ${r.c}">${r.t}</span>`).join('')}</div>
+        <div class="hc-hrs-row">${p.hrs.map(h=>`<div class="hc-hrs-item"><strong>${h.k}:</strong> ${h.v}</div>`).join('')}</div>
+        <div style="font-size:10px;color:#718096;margin-top:8px;line-height:1.5">${p.note}</div>
+      </div>
     </div>`).join('');
 
-  const hireROIData=[
-    {role:'Wedding Assistant',trig:'1+ wedding/wk',cost:'$100–150/event',free:'5–6 hrs/event',unlock:'Handles 150+ guests; enables 2 weddings/wk',roi:'10x+'},
-    {role:'PT Fulfillment (10 hr/wk)',trig:'400 orders/mo',cost:'$650–720/mo',free:'10 hrs/wk',unlock:'Frees you to grow D2C 30–50% faster',roi:'3–5x'},
-    {role:'PT Production (20 hr/wk)',trig:'800 orders/mo',cost:'$1,300–1,500/mo',free:'20 hrs/wk',unlock:'Doubles production capacity; enables 3x order scale',roi:'5–8x'},
-    {role:'FT Ops Manager',trig:'1,500 orders/mo',cost:'$2,400–3,000/mo',free:'Full ops',unlock:'You focus on weddings, content, kits strategy',roi:'4–6x'},
-  ];
-  document.getElementById('hire_roi_table').innerHTML=hireROIData.map(r=>`<tr><td style="font-weight:600;color:#e2e8f0">${r.role}</td><td class="y">${r.trig}</td><td class="r">${r.cost}</td><td class="b">${r.free}</td><td class="g">${r.unlock}</td><td class="g">${r.roi}</td></tr>`).join('');
-
-  // --- PATH TAB ---
-  const weddingBase=wed*4.33*wedprice;
-  const targets=[
-    {name:'Break-even',target:fixed+800},
-    {name:'$10K/mo',target:10000},
-    {name:'$25K/mo',target:25000},
-    {name:'$50K/mo',target:50000},
-    {name:'$1M/yr ($83K/mo)',target:83333},
-    {name:'Sariah ($100K/mo)',target:100000},
-  ];
-  document.getElementById('path_table').innerHTML=targets.map(t=>{
-    const d2cNeeded=Math.max(0,t.target-weddingBase-sets*setval);
-    const ordNeeded=Math.ceil(d2cNeeded/aov);
-    const perDay=(ordNeeded/30).toFixed(1);
-    const magsPD=ordNeeded*qty/30;
-    const pPD=magsPD*presstime/3600;
-    const fPD=ordNeeded/30*(packtime/60)+0.4;
-    const totHr=pPD+fPD+admintime+socialHrsDay+wedHrsDay;
-    const sc=totHr>10?'r':totHr>8?'y':'g';
-    const unlock=ordNeeded<200?'Organic only':ordNeeded<500?'Regular Reels + Etsy SEO':ordNeeded<1000?'Viral content + affiliate':ordNeeded<2000?'Content flywheel + some paid':'Full media engine';
-    return `<tr><td style="font-weight:700;color:#e2e8f0">${t.name}</td><td class="g">${fmt(weddingBase)}/mo</td><td class="${sc}">${fmtN(ordNeeded)}</td><td class="${sc}">${perDay}/day</td><td class="${sc}">${fmtN(totHr,1)} hrs</td><td style="font-size:10px;color:#718096">${unlock}</td></tr>`;
+  // ---- SCALE TAB ----
+  document.getElementById('scale_tbl').innerHTML=[100,200,400,600,800,1000,1200,1500,2000,3000].map(ord=>{
+    const mpd=ord*qty/30;
+    const ph=mpd*(printHrsDay/(magsPerDay||1))+mpd*(pressHrsDay/(magsPerDay||1));
+    const fh=ord/30*(packtime/60)+0.5;
+    const tot=ph+fh+admHrsDay+socHrsDay+wedHrsDay;
+    const isCur=Math.abs(ord-orders)<=100&&Math.abs(ord-orders)===Math.min(...[100,200,400,600,800,1000,1200,1500,2000,3000].map(o=>Math.abs(o-orders)));
+    const sc=tot>10?'r':tot>8?'y':'g';
+    return `<tr${isCur?' style="background:#1a2744;outline:1px solid #4299e1"':''}>
+      <td${isCur?' class="b" style="font-weight:700"':''}>${fmtN(ord)}${isCur?' ← you':''}</td>
+      <td class="b">${fmtN(Math.round(mpd))}</td>
+      <td class="${ph>5?'r':ph>3?'y':'g'}">${fn(ph,1)}</td>
+      <td class="${fh>3?'r':fh>2?'y':'g'}">${fn(fh,1)}</td>
+      <td class="${sc}" style="font-weight:700">${fn(tot,1)}</td>
+      <td class="${sc}">${tot>10?'🔴 Hire now':tot>8?'🟡 Plan hire':tot>6?'🟢 Full day':'🟢 OK'}</td>
+    </tr>`;
   }).join('');
 
-  const hrsPerOrder=(presstime*qty/3600)+(packtime/60);
-  document.getElementById('path_warn_hrs').textContent=fmtN(hrsPerOrder,2);
-  const ordFor1M=Math.ceil((83333-weddingBase)/aov);
-  document.getElementById('path_warn_total').textContent=fmtN(ordFor1M*hrsPerOrder/30,1);
+  const wedRevHr=wedtime>0?wedprice/wedtime:0;
+  const d2cRevHr=(prodHrsDay+fulHrsDay)>0?ch1/((prodHrsDay+fulHrsDay)*30):0;
+  const socRevHr=(posts*hrpost)>0?(total*0.35)/(posts*hrpost*4.33):0;
+  document.getElementById('rev_hr_tbl').innerHTML=[
+    {act:'💒 Wedding events',hrs:fn(wed*wedtime,1)+' hrs/wk',rev:fmt(ch3)+'/mo',dhr:fmt(wedRevHr,0)+'/hr',pri:'🔥 Highest',cls:'g'},
+    {act:'📱 Social content',hrs:fn(posts*hrpost,1)+' hrs/wk',rev:'Drives ~35% of D2C',dhr:fmt(socRevHr,0)+'/hr est.',pri:'🔥 High (compounding)',cls:'g'},
+    {act:'🖨️ D2C Production',hrs:fn(prodHrsDay*7,1)+' hrs/wk',rev:fmt(ch1)+'/mo',dhr:fmt(d2cRevHr,0)+'/hr',pri:'✅ Necessary',cls:'b'},
+    {act:'📦 Fulfillment',hrs:fn(fulHrsDay*7,1)+' hrs/wk',rev:'(part of D2C)',dhr:'Delegate first',pri:'👇 Delegate early',cls:'y'},
+    {act:'💻 Admin/CS',hrs:fn(admHrsDay*7,1)+' hrs/wk',rev:'Overhead',dhr:'Cost',pri:'👇 Systematize/delegate',cls:'p'},
+  ].map(r=>`<tr><td style="font-weight:600;color:#e2e8f0">${r.act}</td><td class="b">${r.hrs}</td><td class="y">${r.rev}</td><td class="${r.cls}">${r.dhr}</td><td style="font-size:10px;color:#718096">${r.pri}</td></tr>`).join('');
 }
 
 function sw(tab,el){
